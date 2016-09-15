@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<module>
+	<name>colissimo_simplicite</name>
+	<displayName><![CDATA[Colissimo Simplicite]]></displayName>
+	<version><![CDATA[1.0.0]]></version>
+	<description><![CDATA[Avec La Poste, Faites-vous livrer là ou vous le souhaitez en France Métropolitaine.]]></description>
+	<author><![CDATA[Quadra Informatique]]></author>
+	<tab><![CDATA[shipping_logistics]]></tab>
+	<is_configurable>1</is_configurable>
+	<need_instance>1</need_instance>
+</module>
