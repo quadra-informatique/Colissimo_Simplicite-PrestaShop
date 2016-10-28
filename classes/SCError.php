@@ -24,11 +24,11 @@
  *  International Registered Trademark & Property of La Poste SA
  */
 
-require_once(dirname(__FILE__).'/../socolissimo.php');
+require_once(dirname(__FILE__).'/../colissimo_simplicite.php');
 
 /* Inherit of Socolissimo to have acces to the module method and objet model method */
 
-class SCError extends Socolissimo
+class SCError extends Colissimo_simplicite
 {
 	/* Const for better understanding */
 

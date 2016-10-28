@@ -26,7 +26,7 @@
 	var link_socolissimo = "{$link_socolissimo_mobile|escape:'UTF-8'}";
 	var soInputs = new Object();
 	var soBwdCompat = "{$SOBWD_C|escape:'htmlall'}";
-	var initialCost_label = "{$initialCost_label|escape:'htmlall'}"
+	var initialCost_label = "{$initialCost_label|escape:'htmlall'}";
 	var initialCost = "{$initialCost|escape:'htmlall'}";
 	var soCarrierId = "{$id_carrier|escape:'htmlall'}";
 	var taxMention = "{$taxMention|escape:'htmlall'}";

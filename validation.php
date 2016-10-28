@@ -26,7 +26,7 @@
 
 include('../../config/config.inc.php');
 include('../../init.php');
-require_once(_PS_MODULE_DIR_.'socolissimo/classes/SCFields.php');
+require_once(_PS_MODULE_DIR_.'colissimo_simplicite/classes/SCFields.php');
 
 /* Init the Context (inherit Socolissimo and handle error) */
 if (!Tools::getValue('DELIVERYMODE'))
