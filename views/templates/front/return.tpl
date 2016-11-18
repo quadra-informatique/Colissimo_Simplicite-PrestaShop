@@ -28,7 +28,7 @@
 {block name="page_content"}
     {if isset($error_list)}
         <div class="alert error">
-            {l s='colissimo simplicite errors list:' mod='colissimo'}
+            {l s='colissimo simplicite errors list:' mod='colissimo_simplicite'}
             <ul style="margin-top: 10px;">
                 {foreach from=$error_list item=current_error}
                     <li>{$current_error|escape:'htmlall':'UTF-8'}</li>
@@ -36,15 +36,15 @@
             </ul>
         </div>
         {if isset($so_url_back)}
-            <a href="{$so_url_back|escape:'htmlall':'UTF-8'}" class="btn btn-primary" title="{l s='Back' mod='colissimo'}">{l s='Back' mod='colissimo_simplicite'}</a>
+            <a href="{$so_url_back|escape:'htmlall':'UTF-8'}" class="btn btn-primary" title="{l s='Back' mod='colissimo_simplicite'}">{l s='Back' mod='colissimo_simplicite'}</a>
         {/if}
     {else}
         <div class="waiting_colissimo">
             <img src="{$logo|escape:'htmlall':'UTF-8'}" />
             <span>{l s='You will be redirect to shop in few moment' mod='colissimo_simplicite'}</span>
             <img src="{$loader|escape:'htmlall':'UTF-8'}" /></div>
-        <form name="myform" id="myformredirect" method="post" action="{$so_url_back}">
-            <input type="hidden" name="delivery_option[{$id_address}]" id="delivery_option_{$id_so}" value="{$id_so},">
+        <form name="myform" id="myformredirect" method="post" action="{$so_url_back|escape:'htmlall':'UTF-8'}">
+            <input type="hidden" name="delivery_option[{$id_address|escape:'htmlall':'UTF-8'}]" id="delivery_option_{$id_so|escape:'htmlall':'UTF-8'}" value="{$id_so|escape:'htmlall':'UTF-8'},">
             <input type="hidden" name="confirmDeliveryOption" value="1">
             <input class="hidden" type="submit">
         </form>

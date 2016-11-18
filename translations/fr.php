@@ -138,7 +138,9 @@ $_MODULE['<{colissimo_simplicite}prestashop>configure_fd54c99e2b37f92c479e2538d5
 $_MODULE['<{colissimo_simplicite}prestashop>configure_729333c9ebeaca82580ca31bacc23946'] = 'Vous pouvez également appeler le support au';
 $_MODULE['<{colissimo_simplicite}prestashop>configure_5dfaf40b2d24f8dddc32cf7154472807'] = 'du Lundi au Vendredi, de 8h à 18h.';
 $_MODULE['<{colissimo_simplicite}prestashop>configure_3a7b1fc8062a2030261cf6ac028511cb'] = 'Prononcez « Incident », puis « Solutions Web ».';
+$_MODULE['<{colissimo_simplicite}prestashop>configure_warning_b28a56259e5b5fee9ac2077b0fc629af'] = 'Vous devez renseigner la partie \"Informations marchand\" pour activer le module en front office.';
 $_MODULE['<{colissimo_simplicite}prestashop>redirect_375c2512d931d15da65f437c3d1e86de'] = 'Vous allez être rédirigé vers la boutique dans un moment. Si ce n\'est pas le cas, cliquez sur le bouton.';
+$_MODULE['<{colissimo_simplicite}prestashop>return_8d0c48c639b60e3768d0b095e8075771'] = 'Liste des erreurs colissimo :';
 $_MODULE['<{colissimo_simplicite}prestashop>return_0557fa923dcee4d0f86b1409f5c2167f'] = 'Revenir à la boutique';
 $_MODULE['<{colissimo_simplicite}prestashop>return_254e3840f7cb46b706bdb1ff33db07c4'] = 'Vous allez être rédirigé vers la boutique dans un moment.';
 $_MODULE['<{colissimo_simplicite}prestashop>admin_order_b70d1d7ff08966a24aa5820d98e4f846'] = 'Colissimo Simplicité';

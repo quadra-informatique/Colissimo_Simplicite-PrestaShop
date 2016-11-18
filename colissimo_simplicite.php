@@ -23,6 +23,7 @@
  *  @license   http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
  *  International Registered Trademark & Property of La Poste SA
  */
+
 if (!defined('_PS_VERSION_')) {
     exit;
 }
@@ -1094,7 +1095,7 @@ class Colissimo_simplicite extends CarrierModule
             return false;
         $sum = 0;
         for ($i = 0; $i != 14; $i++) {
-            $tmp = ((($i + 1) % 2) + 1) * intval($siret[$i]);
+            $tmp = ((($i + 1) % 2) + 1) * (int)$siret[$i];
             if ($tmp >= 10)
                 $tmp -= 9;
             $sum += $tmp;

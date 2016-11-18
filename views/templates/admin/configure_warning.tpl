@@ -26,7 +26,7 @@
 <div class="row colissimo-header">
         <div class="col-lg-12 text-center about">
             <p>
-                <span class="alert alert-danger">{l s='You must fill merchand information otherwise module won\'t work on front' mod='socolissimo'}</span>
+                <span class="alert alert-danger">{l s='You must fill merchand information otherwise module won\'t work on front' mod='colissimo_simplicite'}</span>
             </p>
         </div>
 		</div>

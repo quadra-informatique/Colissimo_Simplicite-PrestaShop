@@ -24,7 +24,7 @@
 *}
 <div class="panel">
     <fieldset style="width:400px;">
-        <legend><img src="{$path_img}" alt="" /> 
+        <legend><img src="{$path_img|escape:'htmlall':'UTF-8'}" alt="" /> 
             {l s='Colissimo Simplicité' mod='colissimo_simplicite'}</legend>
         <b>{l s='Delivery mode' mod='colissimo_simplicite'} : </b>
         {if $is_home}
@@ -57,7 +57,7 @@
                     {l s='Door code' mod='colissimo_simplicite'} 2 : </b>{$delivery_infos->cedoorcode2|escape:'html':'UTF-8'}<br/>
                 {/if}
                 {if $delivery_infos->cedeliveryinformation}<b>{l s='Delivery information' mod='colissimo_simplicite'} : </b>
-                {$delivery_infos->cedeliveryinformation}<br/><br/>
+                {$delivery_infos->cedeliveryinformation|escape:'htmlall':'UTF-8'}<br/><br/>
             {/if}
         {else}
             <span>{$delivery_mode[$delivery_infos->delivery_mode]|escape:'html':'UTF-8'}</span><br /><br />
@@ -82,7 +82,7 @@
             {/if}
             {$delivery_infos->przipcode|escape:'html':'UTF-8'}<br/>
             {$delivery_infos->prtown|escape:'html':'UTF-8'}<br/>
-            {$name_country}<br/>
+            {$name_country|escape:'htmlall':'UTF-8'}<br/>
             {if $delivery_infos->ceemail}<b>
                     {l s='Email' mod='colissimo_simplicite'} : </b>{$delivery_infos->ceemail|escape:'html':'UTF-8'}<br/>
                 {/if}

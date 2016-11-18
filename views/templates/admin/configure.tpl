@@ -28,7 +28,7 @@
             <img src="{$module_dir|escape:'html':'UTF-8'}views/img/colissimo.png" id="colissimo-logo" />
         </div>
         <div class="col-lg-6 about">
-            <h4>{l s='About Socolissimo Simplicité' mod='colissimo_simplicite'} {$colissimo_version}</h4>
+            <h4>{l s='About Socolissimo Simplicité' mod='colissimo_simplicite'} {$colissimo_version|escape:'htmlall':'UTF-8'}</h4>
             Une solution gratuite sans développement, facile à implémenter depuis votre back-office Prestashop.
             <ul>
                 <li>Une page de livraison « iframe » qui reste dans la continuité du site garantissant ainsi une continuité dans le processus d’achat.</li>
@@ -52,7 +52,7 @@
         <div class="col-lg-3 text-center support">
             <h4>{l s='Need support ?' mod='colissimo_simplicite'}</h4>
             {l s='Don\'t hesitate to read the' mod='colissimo_simplicite'} 
-            <h5><a href="{$module_dir|escape:'htmlall'}/readme_fr.pdf" target="_blank"><b>{l s='Vendor manual' mod='colissimo_simplicite'}</b></a></h5> 
+            <h5><a href="{$module_dir|escape:'htmlall':'UTF-8'}/readme_fr.pdf" target="_blank"><b>{l s='Vendor manual' mod='colissimo_simplicite'}</b></a></h5> 
             {l s='to help you to configure the module' mod='colissimo_simplicite'}<br/>
             <p>{l s='You can also call the Hotline at' mod='colissimo_simplicite'}<br/>
                 <strong class="text-branded">0825 086 005</strong><br/>
