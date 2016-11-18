@@ -82,9 +82,9 @@ $_MODULE['<{colissimo_simplicite}prestashop>colissimo_simplicite_e7ef50e6093c77b
 $_MODULE['<{colissimo_simplicite}prestashop>colissimo_simplicite_24ab66c8d99aa31c1dcb00f0e5e564df'] = 'Le nombre de colis est incorrect';
 $_MODULE['<{colissimo_simplicite}prestashop>colissimo_simplicite_8279a78fcce2b4ddfb79dfe689592ed2'] = 'Siret incorrect';
 $_MODULE['<{colissimo_simplicite}prestashop>colissimo_simplicite_8554bbc520a9d24ffda195065bbcc9ee'] = 'Vous devez accepter les termes et conditions';
-$_MODULE['<{colissimo_simplicite}prestashop>colissimo_simplicite_5da618e8e4b89c66fe86e32cdafde142'] = 'A partir de';
+$_MODULE['<{colissimo_simplicite}prestashop>colissimo_simplicite_6460269467c8aa8a87abfd50105d202a'] = 'A partir de';
 $_MODULE['<{colissimo_simplicite}prestashop>colissimo_simplicite_96d4c80bd0b7ccbce555b7d49422c8d9'] = '€';
-$_MODULE['<{colissimo_simplicite}prestashop>colissimo_simplicite_3199d0e4fdc235d991b423c73acdcff7'] = 'TTC';
+$_MODULE['<{colissimo_simplicite}prestashop>colissimo_simplicite_3199d0e4fdc235d991b423c73acdcff7'] = ' TTC';
 $_MODULE['<{colissimo_simplicite}prestashop>colissimo_simplicite_efc5b392834c632e4bea3e7661c8358f'] = 'Gratuit (appliqué après selection d\'adresse)';
 $_MODULE['<{colissimo_simplicite}prestashop>colissimo_simplicite_898d22b4259367825dbbbc174f049197'] = 'Choisir un mode de livraison';
 $_MODULE['<{colissimo_simplicite}prestashop>colissimo_simplicite_6e55ec92b403f0ab31c29f62c837834a'] = 'Modifier le mode de livraison';

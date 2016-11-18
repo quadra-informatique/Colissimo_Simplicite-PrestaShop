@@ -40,5 +40,4 @@
     {foreach from = $inputs item = input key = name name = myLoop}
     soInputs.{$name|escape:'htmlall':'UTF-8'} = "{$input|strip_tags|addslashes}";
     {/foreach}
-
 </script>

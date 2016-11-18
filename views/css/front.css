@@ -31,3 +31,6 @@
 .waiting_colissimo{
     text-align: center;
 }
+#button_socolissimo,#button_socolissimo:hover{
+    color:#fff!important;
+}

@@ -1048,7 +1048,7 @@ class Colissimo_simplicite extends CarrierModule
         if (Configuration::get('PS_SSL_ENABLED'))
             $protocol = 'https://';
 
-        $from_mention = $this->l('From');
+        $from_mention = $this->l('From Cost');
         $initial_cost = $from_cost.$this->l(' €');
         $tax_mention = $this->l(' TTC');
         if ($free_shipping) {
@@ -1366,8 +1366,12 @@ class Colissimo_simplicite extends CarrierModule
                 '(',
                 ')'), '', $ps_address->phone_mobile) != $colissimo_delivery_info->cephonenumber) {
             $new_address->id_customer = (int)$id_customer;
-            $firstname = preg_replace('/\d/', '', Tools::substr($colissimo_delivery_info->prfirstname, 0, 32));
-            $lastname = preg_replace('/\d/', '', Tools::substr($colissimo_delivery_info->prname, 0, 32));
+            $firstname_company = preg_replace('/\d/', '', Tools::substr($colissimo_delivery_info->prfirstname, 0, 31));
+            $lastname_company = preg_replace('/\d/', '', Tools::substr($colissimo_delivery_info->prname, 0, 32));
+            $firstname = preg_replace('/\d/', '', Tools::substr($colissimo_delivery_info->cefirstname, 0, 32));
+            $lastname = preg_replace('/\d/', '', Tools::substr($colissimo_delivery_info->cename, 0, 32));
+            $firstname_company_formatted = trim($this->formatName($firstname_company));
+            $lastname_company_formatted = trim($this->formatName($lastname_company));
             $new_address->lastname = trim($this->formatName($lastname));
             $new_address->firstname = trim($this->formatName($firstname));
             $new_address->postcode = $colissimo_delivery_info->przipcode;
@@ -1379,7 +1383,8 @@ class Colissimo_simplicite extends CarrierModule
             if (!in_array($colissimo_delivery_info->delivery_mode, array(
                     'DOM',
                     'RDV'))) {
-                $new_address->active = 1;
+                $new_address->company = $firstname_company_formatted.' '.$lastname_company_formatted;
+                $new_address->active = 0;
                 $new_address->deleted = 1;
                 $new_address->address1 = $colissimo_delivery_info->pradress1;
                 $new_address->address2 = $colissimo_delivery_info->pradress2;
@@ -1396,6 +1401,7 @@ class Colissimo_simplicite extends CarrierModule
                 $new_address->id_country = $iso_code;
                 $new_address->alias = 'Colissimo - '.date('d-m-Y');
                 $new_address->add();
+                $new_address->active = 0;
                 $new_address->deleted = 1;
                 $new_address->save();
             }

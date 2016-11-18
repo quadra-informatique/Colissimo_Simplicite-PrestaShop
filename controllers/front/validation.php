@@ -102,7 +102,6 @@ class Colissimo_SimpliciteValidationModuleFrontController extends ModuleFrontCon
                 if (!$so->context->cart->update())
                     $errors_list[] = $so->l('Cart cannot be updated. Please try again your selection');
                 else {
-                    // Tools::redirect($redirect.'delivery_option[5]='.$so->context->cart->id_carrier.',');
                     $so->context->smarty->assign('is_valid', 1);
                     $so->context->smarty->assign('id_address', $so->context->cart->id_address_delivery);
                     $so->context->smarty->assign('id_so', $so->context->cart->id_carrier);
