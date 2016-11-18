@@ -356,11 +356,6 @@ class Colissimo_simplicite extends CarrierModule
             )
         );
 
-        // if not activated, only show the activation file field
-        if (!Configuration::get('COLISSIMO_PERSONAL_DATA')) {
-            return $form;
-        } else {
-
 
             //======================================================================
             // GENERAL TAB
@@ -544,7 +539,6 @@ class Colissimo_simplicite extends CarrierModule
                     ),
                 )
             );
-        }
         return $form;
     }
 
