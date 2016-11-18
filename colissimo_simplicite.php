@@ -59,8 +59,9 @@ class Colissimo_simplicite extends CarrierModule
     {
         $this->name = 'colissimo_simplicite';
         $this->tab = 'shipping_logistics';
-        $this->version = '0.0.1';
+        $this->version = '4.0.0';
         $this->author = 'Quadra Informatique';
+        $this->module_key = '8b991db851bdf7c64ca441f1a4481964';
         $this->need_instance = 1;
         $this->bootstrap = true;
         parent::__construct();
