@@ -150,8 +150,8 @@ class ColissimoDeliveryInfo extends ObjectModel
     {
         if ((int)$id_cart && (int)$id_customer) {
             return Db::getInstance()->getValue(
-                    'SELECT id_colissimo_delivery_info FROM '._DB_PREFIX_.'colissimo_delivery_info WHERE'
-                    .' id_cart = '.(int)$id_cart.' AND id_customer ='.(int)$id_customer
+                'SELECT id_colissimo_delivery_info FROM '._DB_PREFIX_.'colissimo_delivery_info WHERE
+                id_cart = '.(int)$id_cart.' AND id_customer ='.(int)$id_customer
             );
         }
         return false;

@@ -71,33 +71,42 @@ class Colissimo_simplicite extends CarrierModule
             'min' => '1.7',
             'max' => _PS_VERSION_);
         $protocol = 'http://';
-        if (Configuration::get('PS_SSL_ENABLED') && Configuration::get('PS_SSL_ENABLED_EVERYWHERE'))
+        if (Configuration::get('PS_SSL_ENABLED') && Configuration::get('PS_SSL_ENABLED_EVERYWHERE')) {
             $protocol = 'https://';
+        }
         $this->url = $protocol.Tools::getShopDomainSsl().__PS_BASE_URI__.'modules/'.$this->name.'/validation.php';
         if (self::isInstalled($this->name)) {
             $warning = array();
             $so_carrier = new Carrier(Configuration::get('COLISSIMO_CARRIER_ID'));
             if (Validate::isLoadedObject($so_carrier)) {
-                if (!$this->checkZone((int)$so_carrier->id))
+                if (!$this->checkZone((int)$so_carrier->id)) {
                     $warning[] .= $this->l('\'Carrier Zone(s)\'').' ';
-                if (!$this->checkGroup((int)$so_carrier->id))
+                }
+                if (!$this->checkGroup((int)$so_carrier->id)) {
                     $warning[] .= $this->l('\'Carrier Group\'').' ';
-                if (!$this->checkRange((int)$so_carrier->id))
+                }
+                if (!$this->checkRange((int)$so_carrier->id)) {
                     $warning[] .= $this->l('\'Carrier Range(s)\'').' ';
-                if (!$this->checkDelivery((int)$so_carrier->id))
+                }
+                if (!$this->checkDelivery((int)$so_carrier->id)) {
                     $warning[] .= $this->l('\'Carrier price delivery\'').' ';
+                }
             }
 
             //Check config and display warning
-            if (!Configuration::get('COLISSIMO_ID'))
+            if (!Configuration::get('COLISSIMO_ID')) {
                 $warning[] .= $this->l('\'Id FO\'').' ';
-            if (!Configuration::get('COLISSIMO_KEY'))
+            }
+            if (!Configuration::get('COLISSIMO_KEY')) {
                 $warning[] .= $this->l('\'Key\'').' ';
-            if (!Configuration::get('COLISSIMO_URL'))
+            }
+            if (!Configuration::get('COLISSIMO_URL')) {
                 $warning[] .= $this->l('\'Url So\'').' ';
+            }
 
-            if (count($warning))
+            if (count($warning)) {
                 $this->warning .= implode(' , ', $warning).$this->l('must be configured to use this module correctly').' ';
+            }
         }
         $this->config_single_values_keys = array(
             'COLISSIMO_CARRIER_ID',
@@ -153,10 +162,9 @@ class Colissimo_simplicite extends CarrierModule
             !Configuration::updateValue('COLISSIMO_SELLER_IMPACT', 0) ||
             !Configuration::updateValue('COLISSIMO_SUP_URL', 'ws.colissimo.fr/supervision-pudo-frame/supervision.jsp') ||
             !Configuration::updateValue('COLISSIMO_SUP', true)
-        //!$this->registerHook('newOrder') ||
-        //!$this->registerHook('paymentTop')
-        )
+        ) {
             include(dirname(__FILE__).'/sql/install.php');
+        }
 
         return parent::install() &&
             $this->registerHook('header') &&
@@ -185,7 +193,6 @@ class Colissimo_simplicite extends CarrierModule
         Configuration::deleteByName('COLISSIMO_SUP');
         Configuration::deleteByName('COLISSIMO_SUP_URL');
         Configuration::deleteByName('COLISSIMO_OVERCOST_TAX');
-        //Configuration::deleteByName('COLISSIMO_PERSONAL_DATA');
 
         $carrier = new Carrier($so_id);
         $carrier->delete();
@@ -350,220 +357,194 @@ class Colissimo_simplicite extends CarrierModule
         );
 
         // if not activated, only show the activation file field
-        if (!Configuration::get('COLISSIMO_PERSONAL_DATA'))
+        if (!Configuration::get('COLISSIMO_PERSONAL_DATA')) {
             return $form;
-        else
+        } else {
 
 
-        //======================================================================
-        // GENERAL TAB
+            //======================================================================
+            // GENERAL TAB
             $form['tabs']['general'] = $this->l('Your Colissimo Box');
 
-        $form['input'][] = array(
-            'tab' => 'general',
-            'col' => 3,
-            'type' => 'text',
-            'required' => true,
-            'label' => $this->l('Encryption key'),
-            'name' => 'COLISSIMO_KEY',
-            'desc' => $this->l('Available in your ').' <a href="https://www.colissimo.entreprise.laposte.fr" target="_blank" >Colissimo Box </a>'.'<br/>'.
-            $this->l('by using the menu "Applications > Delivery > Choice of delivery methods" ')
-        );
-        $form['input'][] = array(
-            'tab' => 'general',
-            'col' => 3,
-            'type' => 'text',
-            'required' => true,
-            'label' => $this->l('Front Office Identifier'),
-            'name' => 'COLISSIMO_ID',
-            'desc' => $this->l('Available in your ').' <a href="https://www.colissimo.entreprise.laposte.fr" target="_blank" >Colissimo Box </a>'.'<br/>'.
-            $this->l('by using the menu "Applications > Delivery > Choice of delivery methods" ')
-        );
-        $form['input'][] = array(
-            'tab' => 'general',
-            'col' => 3,
-            'type' => 'text',
-            'required' => true,
-            'label' => $this->l('Order Preparation time'),
-            'suffix' => $this->l('Day(s)'),
-            'name' => 'COLISSIMO_PREPARATION_TIME',
-            'desc' => $this->l('Business days from Monday to Friday').
-            '<br/>'.$this->l('Must be the same parameter as in your ').
-            ' <a href="https://www.colissimo.entreprise.laposte.fr" target="_blank" >Colissimo Box </a>'
-        );
-        $form['input'][] = array(
-            'tab' => 'general',
-            'type' => 'html',
-            'name' => 'url_note',
-            'html_content' => '<hr/><strong>'.$this->l('Please fill in these two addresses in your').
-            ' <a href="https://www.colissimo.entreprise.laposte.fr" target="_blank" >Colissimo Box </a></strong><ul>'.
-            '<li>'.$this->l('In the "Delivery options selection page"').'</li>'.
-            '<li>'.$this->l('In the "Delivery options selection page (mobile version)"').'</li></ul>',
-        );
+            $form['input'][] = array(
+                'tab' => 'general',
+                'col' => 3,
+                'type' => 'text',
+                'required' => true,
+                'label' => $this->l('Encryption key'),
+                'name' => 'COLISSIMO_KEY',
+                'desc' => $this->l('Available in your ').' <a href="https://www.colissimo.entreprise.laposte.fr" target="_blank" >Colissimo Box </a>'.'<br/>'.
+                $this->l('by using the menu "Applications > Delivery > Choice of delivery methods" ')
+            );
+            $form['input'][] = array(
+                'tab' => 'general',
+                'col' => 3,
+                'type' => 'text',
+                'required' => true,
+                'label' => $this->l('Front Office Identifier'),
+                'name' => 'COLISSIMO_ID',
+                'desc' => $this->l('Available in your ').' <a href="https://www.colissimo.entreprise.laposte.fr" target="_blank" >Colissimo Box </a>'.'<br/>'.
+                $this->l('by using the menu "Applications > Delivery > Choice of delivery methods" ')
+            );
+            $form['input'][] = array(
+                'tab' => 'general',
+                'col' => 3,
+                'type' => 'text',
+                'required' => true,
+                'label' => $this->l('Order Preparation time'),
+                'suffix' => $this->l('Day(s)'),
+                'name' => 'COLISSIMO_PREPARATION_TIME',
+                'desc' => $this->l('Business days from Monday to Friday').
+                '<br/>'.$this->l('Must be the same parameter as in your ').
+                ' <a href="https://www.colissimo.entreprise.laposte.fr" target="_blank" >Colissimo Box </a>'
+            );
+            $form['input'][] = array(
+                'tab' => 'general',
+                'type' => 'html',
+                'name' => 'url_note',
+                'html_content' => '<hr/><strong>'.$this->l('Please fill in these two addresses in your').
+                ' <a href="https://www.colissimo.entreprise.laposte.fr" target="_blank" >Colissimo Box </a></strong><ul>'.
+                '<li>'.$this->l('In the "Delivery options selection page"').'</li>'.
+                '<li>'.$this->l('In the "Delivery options selection page (mobile version)"').'</li></ul>',
+            );
 
-        $form['input'][] = array(
-            'tab' => 'general',
-            'type' => 'free',
-            'label' => $this->l('When the customer has successfully selected the delivery method (Validation)'),
-            'name' => 'VALIDATION_URL',
-        );
-        $form['input'][] = array(
-            'tab' => 'general',
-            'type' => 'free',
-            'label' => $this->l('When the client could not select the delivery method (Failed)'),
-            'name' => 'RETURN_URL',
-        );
+            $form['input'][] = array(
+                'tab' => 'general',
+                'type' => 'free',
+                'label' => $this->l('When the customer has successfully selected the delivery method (Validation)'),
+                'name' => 'VALIDATION_URL',
+            );
+            $form['input'][] = array(
+                'tab' => 'general',
+                'type' => 'free',
+                'label' => $this->l('When the client could not select the delivery method (Failed)'),
+                'name' => 'RETURN_URL',
+            );
 
-        //======================================================================
-        // SYSTEM TAB
-        $form['tabs']['system'] = $this->l('Colissimo simplicity system parameters');
+            //======================================================================
+            // SYSTEM TAB
+            $form['tabs']['system'] = $this->l('Colissimo simplicity system parameters');
 
-        $form['input'][] = array(
-            'tab' => 'system',
-            'col' => 3,
-            'type' => 'text',
-            'required' => true,
-            'label' => $this->l('Url of back office Colissimo.'),
-            'name' => 'COLISSIMO_URL',
-            'desc' => $this->l('Url of back office Colissimo.')
-        );
-        $form['input'][] = array(
-            'tab' => 'system',
-            'col' => 3,
-            'type' => 'text',
-            'required' => true,
-            'label' => $this->l('Url So Mobile'),
-            'name' => 'COLISSIMO_URL_MOBILE',
-            'desc' => $this->l('Url of back office Colissimo Mobile. Customers with smartphones or ipad will be redirect there. Warning, this url do not allow delivery in belgium ')
-        );
-        $form['input'][] = array(
-            'tab' => 'system',
-            'type' => 'switch',
-            'label' => $this->l('Supervision'),
-            'name' => 'COLISSIMO_SUP',
-            'is_bool' => true,
-            'required' => true,
-            'desc' => $this->l('Enable or disable the check availability  of Colissimo service.'),
-            'values' => array(
-                array(
-                    'id' => 'active_on',
-                    'value' => true,
-                    'label' => $this->l('Enabled')
+            $form['input'][] = array(
+                'tab' => 'system',
+                'col' => 3,
+                'type' => 'text',
+                'required' => true,
+                'label' => $this->l('Url of back office Colissimo.'),
+                'name' => 'COLISSIMO_URL',
+                'desc' => $this->l('Url of back office Colissimo.')
+            );
+            $form['input'][] = array(
+                'tab' => 'system',
+                'col' => 3,
+                'type' => 'text',
+                'required' => true,
+                'label' => $this->l('Url So Mobile'),
+                'name' => 'COLISSIMO_URL_MOBILE',
+                'desc' => $this->l('Url of back office Colissimo Mobile. Customers with smartphones or ipad will be redirect there. Warning, this url do not allow delivery in belgium ')
+            );
+            $form['input'][] = array(
+                'tab' => 'system',
+                'type' => 'switch',
+                'label' => $this->l('Supervision'),
+                'name' => 'COLISSIMO_SUP',
+                'is_bool' => true,
+                'required' => true,
+                'desc' => $this->l('Enable or disable the check availability  of Colissimo service.'),
+                'values' => array(
+                    array(
+                        'id' => 'active_on',
+                        'value' => true,
+                        'label' => $this->l('Enabled')
+                    ),
+                    array(
+                        'id' => 'active_off',
+                        'value' => false,
+                        'label' => $this->l('Disabled')
+                    )
                 ),
-                array(
-                    'id' => 'active_off',
-                    'value' => false,
-                    'label' => $this->l('Disabled')
+            );
+            $form['input'][] = array(
+                'tab' => 'system',
+                'col' => 3,
+                'type' => 'text',
+                'required' => true,
+                'label' => $this->l('Url Supervision'),
+                'name' => 'COLISSIMO_SUP_URL',
+                'desc' => $this->l('The monitor URL is to ensure the availability of the socolissimo service. We strongly recommend that you do not disable it')
+            );
+
+            //======================================================================
+            // PRESTASHOP TAB
+            $form['tabs']['prestashop'] = $this->l('Colissimo simplicity prestashop parameters');
+
+            $form['input'][] = array(
+                'tab' => 'prestashop',
+                'type' => 'select',
+                'required' => true,
+                'label' => $this->l('Home carrier'),
+                'name' => 'COLISSIMO_CARRIER_ID',
+                'options' => array(
+                    'query' => Carrier::getCarriers($this->context->language->id, true, false, false, null, Carrier::ALL_CARRIERS),
+                    'id' => 'id_carrier',
+                    'name' => 'name'
+                ),
+                'desc' => $this->l('Carrier used to get "Colissimo at home" cost')
+            );
+            $form['input'][] = array(
+                'tab' => 'prestashop',
+                'type' => 'switch',
+                'col' => 4,
+                'label' => $this->l('Withdrawal point cost'),
+                'name' => 'COLISSIMO_COST_SELLER',
+                'is_bool' => true,
+                'required' => true,
+                'desc' => $this->l('This cost override the normal cost for seller delivery.'),
+                'values' => array(
+                    array(
+                        'id' => 'active_on',
+                        'value' => true,
+                        'label' => $this->l('Enabled')
+                    ),
+                    array(
+                        'id' => 'active_off',
+                        'value' => false,
+                        'label' => $this->l('Disabled')
+                    )
+                ),
+            );
+            $form['input'][] = array(
+                'tab' => 'prestashop',
+                'col' => 4,
+                'type' => 'text',
+                'required' => true,
+                'label' => $this->l('Withdrawal cost'),
+                'name' => 'COLISSIMO_SELLER_AMOUNT',
+                'desc' => $this->l('Withdrawal cost for "Colissimo at a withdrawal point"')
+            );
+            $form['input'][] = array(
+                'tab' => 'prestashop',
+                'col' => 3,
+                'type' => 'radio',
+                'label' => $this->l('Price impact'),
+                'name' => 'COLISSIMO_SELLER_IMPACT',
+                'required' => false,
+                'desc' => $this->l('Choose your impact on the price for Withdrawal cost'),
+                'values' => array(
+                    array
+                        (
+                        'id' => 'price_down',
+                        'value' => 0,
+                        'label' => $this->l('Down the price')
+                    ),
+                    array(
+                        'id' => 'price_up',
+                        'value' => 1,
+                        'label' => $this->l('Up the price')
+                    ),
                 )
-            ),
-        );
-        $form['input'][] = array(
-            'tab' => 'system',
-            'col' => 3,
-            'type' => 'text',
-            'required' => true,
-            'label' => $this->l('Url Supervision'),
-            'name' => 'COLISSIMO_SUP_URL',
-            'desc' => $this->l('The monitor URL is to ensure the availability of the socolissimo service. We strongly recommend that you do not disable it')
-        );
-
-        //======================================================================
-        // PRESTASHOP TAB
-        $form['tabs']['prestashop'] = $this->l('Colissimo simplicity prestashop parameters');
-
-        /* $form['input'][] = array(
-          'tab' => 'prestashop',
-          'col' => 3,
-          'type' => 'radio',
-          'label' => $this->l('Display Mode'),
-          'name' => 'DISPLAY_TYPE',
-          'required' => false,
-          'desc' => $this->l('Choose your display mode for Simplicity formula'),
-          'values' => array(
-          array
-          (
-          'id' => 'classic_on',
-          'value' => 0,
-          'label' => $this->l('Classic')
-          ),
-          array(
-          'id' => 'fancybox_on',
-          'value' => 1,
-          'label' => $this->l('Fancybox')
-          ),
-          array(
-          'id' => 'iframe_on',
-          'value' => 2,
-          'label' => $this->l('Iframe')
-          )
-          )
-          ); */
-        $form['input'][] = array(
-            'tab' => 'prestashop',
-            'type' => 'select',
-            'required' => true,
-            'label' => $this->l('Home carrier'),
-            'name' => 'COLISSIMO_CARRIER_ID',
-            'options' => array(
-                'query' => Carrier::getCarriers($this->context->language->id, true, false, false, null, Carrier::ALL_CARRIERS),
-                'id' => 'id_carrier',
-                'name' => 'name'
-            ),
-            'desc' => $this->l('Carrier used to get "Colissimo at home" cost')
-        );
-        $form['input'][] = array(
-            'tab' => 'prestashop',
-            'type' => 'switch',
-            'col' => 4,
-            'label' => $this->l('Withdrawal point cost'),
-            'name' => 'COLISSIMO_COST_SELLER',
-            'is_bool' => true,
-            'required' => true,
-            'desc' => $this->l('This cost override the normal cost for seller delivery.'),
-            'values' => array(
-                array(
-                    'id' => 'active_on',
-                    'value' => true,
-                    'label' => $this->l('Enabled')
-                ),
-                array(
-                    'id' => 'active_off',
-                    'value' => false,
-                    'label' => $this->l('Disabled')
-                )
-            ),
-        );
-        $form['input'][] = array(
-            'tab' => 'prestashop',
-            'col' => 4,
-            'type' => 'text',
-            'required' => true,
-            'label' => $this->l('Withdrawal cost'),
-            'name' => 'COLISSIMO_SELLER_AMOUNT',
-            'desc' => $this->l('Withdrawal cost for "Colissimo at a withdrawal point"')
-        );
-        $form['input'][] = array(
-            'tab' => 'prestashop',
-            'col' => 3,
-            'type' => 'radio',
-            'label' => $this->l('Price impact'),
-            'name' => 'COLISSIMO_SELLER_IMPACT',
-            'required' => false,
-            'desc' => $this->l('Choose your impact on the price for Withdrawal cost'),
-            'values' => array(
-                array
-                    (
-                    'id' => 'price_down',
-                    'value' => 0,
-                    'label' => $this->l('Down the price')
-                ),
-                array(
-                    'id' => 'price_up',
-                    'value' => 1,
-                    'label' => $this->l('Up the price')
-                ),
-            )
-        );
+            );
+        }
         return $form;
     }
 
@@ -646,7 +627,8 @@ class Colissimo_simplicite extends CarrierModule
             // re allocation id socolissimo if needed
             if ((int)Tools::getValue('COLISSIMO_CARRIER_ID') != (int)Configuration::get('COLISSIMO_CARRIER_ID')) {
                 Configuration::updateValue(
-                    'COLISSIMO_CARRIER_ID', (int)Tools::getValue('COLISSIMO_CARRIER_ID')
+                    'COLISSIMO_CARRIER_ID',
+                    (int)Tools::getValue('COLISSIMO_CARRIER_ID')
                 );
                 $this->reallocationCarrier((int)Configuration::get('COLISSIMO_CARRIER_ID'));
             }
@@ -753,13 +735,16 @@ class Colissimo_simplicite extends CarrierModule
         $carrier->need_range = $this->config['need_range'];
 
         foreach (Language::getLanguages() as $lang) {
-            if ($lang['iso_code'] == 'fr')
+            if ($lang['iso_code'] == 'fr') {
                 $carrier->delay[$lang['id_lang']] = $this->config['delay'][$lang['iso_code']];
-            if ($lang['iso_code'] == 'en')
+            }
+            if ($lang['iso_code'] == 'en') {
                 $carrier->delay[$lang['id_lang']] = $this->config['delay'][$lang['iso_code']];
+            }
         }
-        if (Shop::isFeatureActive())
+        if (Shop::isFeatureActive()) {
             Shop::setContext(Shop::CONTEXT_ALL);
+        }
 
         if ($carrier->add() == true) {
             @copy(dirname(__FILE__).'/views/img/colissimo.jpg', _PS_SHIP_IMG_DIR_.'/'.(int)$carrier->id.'.jpg');
@@ -866,8 +851,6 @@ class Colissimo_simplicite extends CarrierModule
         if ((int)$id_colissimo_delivery_info) {
             $delivery_infos = new ColissimoDeliveryInfo((int)$id_colissimo_delivery_info);
 
-
-            // in 2.8.0 country is mandatory
             $sql = Db::getInstance()->getRow('SELECT * FROM '._DB_PREFIX_.'country c
 										  LEFT JOIN '._DB_PREFIX_.'country_lang cl ON cl.id_lang = '.(int)$params['cookie']->id_lang.'
 										  AND cl.id_country = c.id_country WHERE iso_code = "'.pSQL($delivery_infos->cecountry).'"');
@@ -900,8 +883,9 @@ class Colissimo_simplicite extends CarrierModule
 
     public function hookActionCarrierUpdate($params)
     {
-        if (Shop::isFeatureActive())
+        if (Shop::isFeatureActive()) {
             Shop::setContext(Shop::CONTEXT_ALL);
+        }
 
         if ((int)$params['id_carrier'] == (int)Configuration::get('COLISSIMO_CARRIER_ID')) {
             Configuration::updateValue('COLISSIMO_CARRIER_ID', (int)$params['carrier']->id);
@@ -913,22 +897,31 @@ class Colissimo_simplicite extends CarrierModule
 
         $carrier_so = new Carrier((int)Configuration::get('COLISSIMO_CARRIER_ID'));
 
-        if (!isset($carrier_so) || !$carrier_so->active)
+        if (!isset($carrier_so) || !$carrier_so->active) {
             return '';
+        }
         $id_carrier = (int)$carrier_so->id;
         $address_delivery = new Address((int)$params['cart']->id_address_delivery);
 
         $country = new Country((int)$address_delivery->id_country);
         $carriers = Carrier::getCarriers(
-                $this->context->language->id, true, false, false, null, (defined('ALL_CARRIERS') ? ALL_CARRIERS : Carrier::ALL_CARRIERS));
+            $this->context->language->id,
+            true,
+            false,
+            false,
+            null,
+            (defined('ALL_CARRIERS') ? ALL_CARRIERS : Carrier::ALL_CARRIERS)
+        );
 
         // bug fix for cart rule with restriction
         CartRule::autoAddToCart($this->context);
 
         // For now works only with single shipping !
-        if (method_exists($params['cart'], 'carrierIsSelected'))
-            if ($params['cart']->carrierIsSelected((int)$carrier_so->id, $address_delivery->id))
+        if (method_exists($params['cart'], 'carrierIsSelected')) {
+            if ($params['cart']->carrierIsSelected((int)$carrier_so->id, $address_delivery->id)) {
                 $id_carrier = (int)$carrier_so->id;
+            }
+        }
 
         $customer = new Customer($address_delivery->id_customer);
 
@@ -939,10 +932,11 @@ class Colissimo_simplicite extends CarrierModule
 
         if (in_array((int)$customer->id_gender, array(
                 1,
-                2)))
+                2))) {
             $cecivility = $gender[(int)$customer->id_gender];
-        else
+        } else {
             $cecivility = 'MR';
+        }
 
         $tax_rate = Tax::getCarrierTaxRate($id_carrier, isset($params['cart']->id_address_delivery) ? $params['cart']->id_address_delivery : null);
         $std_cost_with_taxes = number_format((float)$this->initial_cost * (1 + ($tax_rate / 100)), 2, ',', ' ');
@@ -972,16 +966,25 @@ class Colissimo_simplicite extends CarrierModule
             if (!$free_shipping) {
                 $key_search = $id_carrier.',';
                 $deliveries_list = $params['cart']->getDeliveryOptionList();
-                foreach ($deliveries_list as $deliveries) foreach ($deliveries as $key => $elt) if ($key == $key_search)
+                foreach ($deliveries_list as $deliveries) {
+                    foreach ($deliveries as $key => $elt) {
+                        if ($key == $key_search) {
                             $free_shipping = $elt['is_free'];
+                        }
+                    }
+                }
             }
-        }
-        else {
+        } else {
             // for cart rule with restriction
             $key_search = $id_carrier.',';
             $deliveries_list = $params['cart']->getDeliveryOptionList();
-            foreach ($deliveries_list as $deliveries) foreach ($deliveries as $key => $elt) if ($key == $key_search)
+            foreach ($deliveries_list as $deliveries) {
+                foreach ($deliveries as $key => $elt) {
+                    if ($key == $key_search) {
                         $free_shipping = $elt['is_free'];
+                    }
+                }
+            }
         }
 
 
@@ -1004,16 +1007,22 @@ class Colissimo_simplicite extends CarrierModule
             'ceTown' => $this->replaceAccentedChars(Tools::substr($address_delivery->city, 0, 32)),
             'ceEmail' => $this->replaceAccentedChars($params['cookie']->email),
             'cePhoneNumber' => $this->replaceAccentedChars(
-                str_replace(array(
-                ' ',
-                '.',
-                '-',
-                ',',
-                ';',
-                '/',
-                '\\',
-                '(',
-                ')'), '', $address_delivery->phone_mobile)),
+                str_replace(
+                    array(
+                        ' ',
+                        '.',
+                        '-',
+                        ',',
+                        ';',
+                        '/',
+                        '\\',
+                        '(',
+                        ')'
+                    ),
+                    '',
+                    $address_delivery->phone_mobile
+                )
+            ),
             'dyWeight' => (float)$params['cart']->getTotalWeight() * 1000,
             'trParamPlus' => $carrier_so->id,
             'trReturnUrlKo' => htmlentities($this->url, ENT_NOQUOTES, 'UTF-8'),
@@ -1023,8 +1032,9 @@ class Colissimo_simplicite extends CarrierModule
             'trInter' => 1,
             'ceLang' => 'FR'
         );
-        if (!$inputs['dyForwardingChargesCMT'] && !Configuration::get('SOCOLISSIMO_COST_SELLER'))
+        if (!$inputs['dyForwardingChargesCMT'] && !Configuration::get('SOCOLISSIMO_COST_SELLER')) {
             unset($inputs['dyForwardingChargesCMT']);
+        }
 
         // set params for Api 3.0 if needed
         $inputs = $this->setInputParams($inputs);
@@ -1034,11 +1044,13 @@ class Colissimo_simplicite extends CarrierModule
 
         // calculate lowest cost
         $from_cost = $std_cost_with_taxes;
-        if (($seller_cost_with_taxes < $std_cost_with_taxes ) && Configuration::get('COLISSIMO_COST_SELLER'))
+        if (($seller_cost_with_taxes < $std_cost_with_taxes ) && Configuration::get('COLISSIMO_COST_SELLER')) {
             $from_cost = $seller_cost_with_taxes;
+        }
         $rewrite_active = true;
-        if (!Configuration::get('PS_REWRITING_SETTINGS'))
+        if (!Configuration::get('PS_REWRITING_SETTINGS')) {
             $rewrite_active = false;
+        }
 
         $link = new Link();
         $module_link = $link->getModuleLink('colissimo_simplicite', 'redirect', array(), true);
@@ -1046,8 +1058,9 @@ class Colissimo_simplicite extends CarrierModule
 
         // automatic settings api protocol for ssl
         $protocol = 'http://';
-        if (Configuration::get('PS_SSL_ENABLED'))
+        if (Configuration::get('PS_SSL_ENABLED')) {
             $protocol = 'https://';
+        }
 
         $from_mention = $this->l('From Cost');
         $initial_cost = $from_cost.$this->l(' €');
@@ -1091,13 +1104,15 @@ class Colissimo_simplicite extends CarrierModule
      */
     public function isSiret($siret)
     {
-        if (Tools::strlen($siret) != 14)
+        if (Tools::strlen($siret) != 14) {
             return false;
+        }
         $sum = 0;
         for ($i = 0; $i != 14; $i++) {
             $tmp = ((($i + 1) % 2) + 1) * (int)$siret[$i];
-            if ($tmp >= 10)
+            if ($tmp >= 10) {
                 $tmp -= 9;
+            }
             $sum += $tmp;
         }
         return ($sum % 10 === 0);
@@ -1129,20 +1144,20 @@ class Colissimo_simplicite extends CarrierModule
         $carrier = new Carrier($id_carrier);
         if ($carrier->shipping_method) {
             switch ($carrier->shipping_method) {
-                case '2' :
+                case '2':
                     $sql = 'SELECT * FROM '._DB_PREFIX_.'range_price WHERE id_carrier = '.(int)$id_carrier;
                     break;
-                case '1' :
+                case '1':
                     $sql = 'SELECT * FROM '._DB_PREFIX_.'range_weight WHERE id_carrier = '.(int)$id_carrier;
                     break;
             }
         }
         if (!$sql) {
             switch (Configuration::get('PS_SHIPPING_METHOD')) {
-                case '0' :
+                case '0':
                     $sql = 'SELECT * FROM '._DB_PREFIX_.'range_price WHERE id_carrier = '.(int)$id_carrier;
                     break;
-                case '1' :
+                case '1':
                     $sql = 'SELECT * FROM '._DB_PREFIX_.'range_weight WHERE id_carrier = '.(int)$id_carrier;
                     break;
             }
@@ -1263,7 +1278,9 @@ class Colissimo_simplicite extends CarrierModule
             'Z',
             'AE',
             'OE'
-            ), $str);
+            ),
+            $str
+        );
         $array_unauthorised_api = array(
             ';',
             '€',
@@ -1290,7 +1307,9 @@ class Colissimo_simplicite extends CarrierModule
             '°',
             '²',
             '"');
-        foreach ($array_unauthorised_api as $key => $value) $str = str_replace($value, '', $str);
+        foreach ($array_unauthorised_api as $key => $value) {
+            $str = str_replace($value, '', $str);
+        }
         $str = preg_replace('/\s+/', ' ', $str);
         return $str;
     }
@@ -1440,9 +1459,12 @@ class Colissimo_simplicite extends CarrierModule
     {
         $str = '';
 
-        foreach ($params as $key => $value) if (!in_array(Tools::strtoupper($key), array(
-                    'SIGNATURE')))
+        foreach ($params as $key => $value) {
+            if (!in_array(Tools::strtoupper($key), array(
+                    'SIGNATURE'))) {
                 $str .= utf8_decode($value);
+            }
+        }
 
         return sha1($str.Tools::strtolower(Configuration::get('COLISSIMO_KEY')));
     }

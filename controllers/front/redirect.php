@@ -100,10 +100,10 @@ class Colissimo_SimpliciteRedirectModuleFrontController extends ModuleFrontContr
 
     public function isMobile()
     {
-        if (method_exists(Context::getContext()->mobile_detect, 'isMobile'))
+        if (method_exists(Context::getContext()->mobile_detect, 'isMobile')) {
             return (bool)Context::getContext()->mobile_detect->isMobile();
-        else
-            return false;
+        }
+        return false;
     }
 
     public function isMobileDevice()

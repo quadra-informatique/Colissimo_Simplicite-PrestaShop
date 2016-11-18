@@ -40,10 +40,13 @@ class Colissimo_SimpliciteValidationModuleFrontController extends ModuleFrontCon
         parent::initContent();
         $errors_list = false;
         /* Init the Context (inherit Socolissimo and handle error) */
-        if (!Tools::getValue('DELIVERYMODE'))
-            $so = new SCFields(Tools::getValue('deliveryMode')); /* api 4.0 mobile */
-        else
-            $so = new SCFields(Tools::getValue('DELIVERYMODE')); /* api 4.0 */
+        if (!Tools::getValue('DELIVERYMODE')) {
+            /* api 4.0 mobile */
+            $so = new SCFields(Tools::getValue('deliveryMode'));
+        } else {
+            /* api 4.0 */
+            $so = new SCFields(Tools::getValue('DELIVERYMODE'));
+        }
 
         $redirect = __PS_BASE_URI__.'index.php?controller=order';
         $so->context->smarty->assign('so_url_back', $redirect);
@@ -69,19 +72,31 @@ class Colissimo_SimpliciteValidationModuleFrontController extends ModuleFrontCon
                 $return['TRRETURNURLKO'] = Tools::getValue('TRRETURNURLKO'); /* api 4.0 */
             } else {
                 /* Treating parameters for api 4.0 mobile */
-                if (empty($return['TRINTER']))
-                    $return['TRINTER'] = 0; /* 0 by default */
-                if (empty($return['CELANG']))
-                    $return['CELANG'] = 'fr_FR'; /* fr_FR by default */
-                if (!empty($return['PRPAYS']))
+                if (empty($return['TRINTER'])) {
+                    /* 0 by default */
+                    $return['TRINTER'] = 0;
+                }
+                if (empty($return['CELANG'])) {
+                    /* fr_FR by default */
+                    $return['CELANG'] = 'fr_FR';
+                }
+                if (!empty($return['PRPAYS'])) {
                     unset($return['PRPAYS']);
-                if (!empty($return['CODERESEAU']))
+                }
+                if (!empty($return['CODERESEAU'])) {
                     unset($return['CODERESEAU']);
+                }
             }
-            foreach ($so->getFields(SCFields::REQUIRED) as $field) if (!isset($return[$field]))
+            foreach ($so->getFields(SCFields::REQUIRED) as $field) {
+                if (!isset($return[$field])) {
                     $errors_list[] = $so->l('This key is required for Socolissimo:').$field;
-        } else
-            foreach ($errors_codes as $code) $errors_list[] = $so->l('Error code:').' '.$so->getError($code);
+                }
+            }
+        } else {
+            foreach ($errors_codes as $code) {
+                $errors_list[] = $so->l('Error code:').' '.$so->getError($code);
+            }
+        }
 
         if (empty($errors_list)) {
             if ($so->isCorrectSignKey($return['SIGNATURE'], $return) && $so->context->cart->id && $this->saveOrderShippingDetails($so->context->cart->id, (int)$return['TRCLIENTNUMBER'], $return, $so)) {
@@ -89,28 +104,32 @@ class Colissimo_SimpliciteValidationModuleFrontController extends ModuleFrontCon
 
                 if (count($trparamplus) > 1) {
                     $so->context->cart->id_carrier = (int)$trparamplus[0];
-                    if ($trparamplus[1] == 'checked' || $trparamplus[1] == 1 || $trparamplus[1] == 'true') /* value can be "undefined" or "not checked" */
+                    if ($trparamplus[1] == 'checked' || $trparamplus[1] == 1 || $trparamplus[1] == 'true') {
+                        /* value can be "undefined" or "not checked" */
                         $so->context->cart->gift = 1;
-                    else
+                    } else {
                         $so->context->cart->gift = 0;
-                }
-                elseif (count($trparamplus) == 1)
+                    }
+                } elseif (count($trparamplus) == 1) {
                     $so->context->cart->id_carrier = (int)$trparamplus[0];
+                }
 
-                if ((int)$so->context->cart->gift && Validate::isMessage($trparamplus[2]))
+                if ((int)$so->context->cart->gift && Validate::isMessage($trparamplus[2])) {
                     $so->context->cart->gift_message = strip_tags($trparamplus[2]);
+                }
 
-                if (!$so->context->cart->update())
+                if (!$so->context->cart->update()) {
                     $errors_list[] = $so->l('Cart cannot be updated. Please try again your selection');
-                else {
+                } else {
                     $so->context->smarty->assign('is_valid', 1);
                     $so->context->smarty->assign('id_address', $so->context->cart->id_address_delivery);
                     $so->context->smarty->assign('id_so', $so->context->cart->id_carrier);
                     $so->context->smarty->assign('logo', Tools::getHttpHost(true).__PS_BASE_URI__.'modules/colissimo_simplicite/logo.gif');
                     $so->context->smarty->assign('loader', Tools::getHttpHost(true).__PS_BASE_URI__.'modules/colissimo_simplicite/views/img/ajax-loader.gif');
                 }
-            } else
+            } else {
                 $errors_list[] = $so->getError('999');
+            }
         }
         if ($errors_list) {
             $so->context->smarty->assign('error_list', $errors_list);
@@ -127,20 +146,24 @@ class Colissimo_SimpliciteValidationModuleFrontController extends ModuleFrontCon
         $billing_address = new Address($cart->id_address_invoice);
         $phone_number = $so_params['CEPHONENUMBER'];
         if (!$so_params['CEPHONENUMBER']) {
-            if ($delivery_address->phone_mobile)
+            if ($delivery_address->phone_mobile) {
                 $phone_number = $delivery_address->phone_mobile;
-            elseif ($delivery_address->phone)
+            } elseif ($delivery_address->phone) {
                 $phone_number = $delivery_address->phone;
-            elseif ($billing_address->phone_mobile)
+            } elseif ($billing_address->phone_mobile) {
                 $phone_number = $billing_address->phone_mobile;
-            elseif ($billing_address->phone)
+            } elseif ($billing_address->phone) {
                 $phone_number = $billing_address->phone;
-            else
+            } else {
                 $phone_number = '';
+            }
         }
         // if api use is 3.0 we need to decode for accentued chars
-        if (!isset($so_params['CHARSET']))
-            foreach ($so_params as $key => $value) $so_params[$key] = utf8_decode($value);
+        if (!isset($so_params['CHARSET'])) {
+            foreach ($so_params as $key => $value) {
+                $so_params[$key] = utf8_decode($value);
+            }
+        }
 
         $delivery_mode = array(
             'DOM' => 'Livraison à domicile',
@@ -155,12 +178,13 @@ class Colissimo_SimpliciteValidationModuleFrontController extends ModuleFrontCon
             'RDV' => 'Livraison sur Rendez-vous');
 
         // default country france
-        if (isset($so_params['PRPAYS']))
+        if (isset($so_params['PRPAYS'])) {
             $country_code = $so_params['PRPAYS'];
-        elseif (isset($so_params['CEPAYS']))
+        } elseif (isset($so_params['CEPAYS'])) {
             $country_code = $so_params['CEPAYS'];
-        else
+        } else {
             $country_code = 'FR';
+        }
         $id_colissimo_delivery_info = ColissimoDeliveryInfo::getDeliveryInfoExist((int)$id_cart, (int)$id_customer);
 
         if ((int)$id_colissimo_delivery_info) {
