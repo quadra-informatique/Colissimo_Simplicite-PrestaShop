@@ -23,11 +23,12 @@
 *  International Registered Trademark & Property of La Poste SA
 *}
 <a href="#" style="display:none" class="fancybox fancybox.iframe" id="soLink"></a>
-<a class="btn btn-primary" id="button_socolissimo" onclick="redirect();" >{$select_label|escape:'htmlall':'UTF-8'}
+<a class="btn btn-primary" id="button_socolissimo" onclick="{if $on_mobile_device}redirect_mobile();{else}redirect();{/if}" >{$select_label|escape:'htmlall':'UTF-8'}
 </a>
 
 <script type="text/javascript">
     var link_socolissimo = "{$link_socolissimo|escape:'UTF-8'}";
+    var link_socolissimo_mobile = "{$link_socolissimo_mobile|escape:'UTF-8'}";
     var soInputs = new Object();
     var soCarrierId = "{$id_carrier|escape:'htmlall':'UTF-8'}";
     var soToken = "{$token|escape:'htmlall':'UTF-8'}";

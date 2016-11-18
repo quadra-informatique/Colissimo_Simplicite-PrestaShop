@@ -37,7 +37,7 @@ class Colissimo_SimpliciteRedirectModuleFrontController extends ModuleFrontContr
      */
     public function initContent()
     {
-        parent::initContent();
+        //parent::initContent();
 
         $so = new SCfields('API');
 
@@ -72,15 +72,47 @@ class Colissimo_SimpliciteRedirectModuleFrontController extends ModuleFrontContr
         if (Configuration::get('PS_SSL_ENABLED')) {
             $protocol = 'https://';
         }
-        $socolissimo_url = $protocol.Configuration::get('SOCOLISSIMO_URL');
+
+        $colissimo_url = $protocol.Configuration::get('COLISSIMO_URL');
+        if ($this->isMobileDevice()) {
+            $colissimo_url = $protocol.Configuration::get('COLISSIMO_URL_MOBILE');
+        }
 
         Context::getContext()->smarty->assign(array(
             'inputs' => $inputs,
-            'socolissimo_url' => $socolissimo_url,
-            'logo' => Tools::getHttpHost(true).__PS_BASE_URI__.'modules/colissimo/logo.gif',
-            'loader' => Tools::getHttpHost(true).__PS_BASE_URI__.'modules/colissimo/views/img/ajax-loader.gif',
+            'colissimo_url' => $colissimo_url,
+            'logo' => Tools::getHttpHost(true).__PS_BASE_URI__.'modules/colissimo_simplicite/logo.gif',
+            'loader' => Tools::getHttpHost(true).__PS_BASE_URI__.'modules/colissimo_simplicite/views/img/ajax-loader.gif',
         ));
 
-        $this->setTemplate('redirect.tpl');
+        $this->setTemplate('module:colissimo_simplicite/views/templates/front/redirect.tpl');
+    }
+
+    /**
+     * Check if agent user is iPad(for so_mobile)
+     * @return bool
+     */
+    public function isIpad()
+    {
+        return (bool)strpos($_SERVER['HTTP_USER_AGENT'], 'iPad');
+    }
+
+    public function isMobile()
+    {
+        if (method_exists(Context::getContext()->mobile_detect, 'isMobile'))
+            return (bool)Context::getContext()->mobile_detect->isMobile();
+        else
+            return false;
+    }
+
+    public function isMobileDevice()
+    {
+        $get_mobile_device = Context::getContext()->getMobileDevice();
+
+        // set api params for 4.0 and mobile
+        if ($get_mobile_device || $this->isIpad() || $this->isMobile()) {
+            return true;
+        }
+        return false;
     }
 }

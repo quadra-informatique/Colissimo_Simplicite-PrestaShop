@@ -26,6 +26,7 @@
 $sql = array();
 
 $sql[] = 'CREATE TABLE IF NOT EXISTS `'._DB_PREFIX_.'colissimo_delivery_info` (
+            `id_colissimo_delivery_info` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
             `id_cart` int(10) NOT NULL,
             `id_customer` int(10) NOT NULL,
 			`delivery_mode` varchar(3) NOT NULL,
@@ -53,7 +54,7 @@ $sql[] = 'CREATE TABLE IF NOT EXISTS `'._DB_PREFIX_.'colissimo_delivery_info` (
 			`distributionsort` varchar(64) NOT NULL,
 			`versionplantri` text(10) NOT NULL,
 			`dyforwardingcharges` decimal(20,6) NOT NULL,
-			PRIMARY KEY  (`id_cart`,`id_customer`)
+			PRIMARY KEY  (`id_colissimo_delivery_info`)
 			) ENGINE='._MYSQL_ENGINE_.' DEFAULT CHARSET=utf8;';
 
 foreach ($sql as $query) {

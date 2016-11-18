@@ -22,24 +22,12 @@
 *  @license   http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
 *  International Registered Trademark & Property of La Poste SA
 *}
-
-<!DOCTYPE html>
-<html>
-	<head>
-		<meta http-equiv="Content-Type" content="application/xhtml+xml; charset=iso-8859-1" />
-	</head>
-	<body onload="document.getElementById('socoForm').submit();">
-		<div style="width:320px;margin:0 auto;text-align:center;">
-			<form id="socoForm" name="form" action="{$colissimo_url|escape:'htmlall':'UTF-8'}" method="POST">
-
-				{foreach from=$inputs key=key item=val}
-					<input type="hidden" name="{$key|escape:'htmlall':'UTF-8'}" value="{$val|escape:'htmlall':'UTF-8'}"/>
-				{/foreach}
-				<img src="{$logo|escape:'htmlall':'UTF-8'}" />
-				<p>{l s='You will be redirect to colissimo in few moment. If it is not the case, please click button.' mod='colissimo_simplicite'}</p>
-				<p><img src="{$loader|escape:'htmlall':'UTF-8'}" /></p>
-				<input type="submit" value="Envoyer" />
-			</form>
+<div class="panel"> 
+<div class="row colissimo-header">
+        <div class="col-lg-12 text-center about">
+            <p>
+                <span class="alert alert-danger">{l s='You must fill merchand information otherwise module won\'t work on front' mod='socolissimo'}</span>
+            </p>
+        </div>
 		</div>
-	</body>
-</html>
+</div>

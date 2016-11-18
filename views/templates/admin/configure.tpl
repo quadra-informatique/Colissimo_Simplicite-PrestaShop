@@ -24,11 +24,11 @@
 *}
 <div class="panel">
     <div class="row colissimo-header">
-        <div class="col-md-1 text-center logo">
+        <div class="col-lg-1 text-center logo">
             <img src="{$module_dir|escape:'html':'UTF-8'}views/img/colissimo.png" id="colissimo-logo" />
         </div>
-        <div class="col-md-6 about">
-            <h4>{l s='About Socolissimo Simplicité' mod='socolissimo'} {$colissimo_version}</h4>
+        <div class="col-lg-6 about">
+            <h4>{l s='About Socolissimo Simplicité' mod='colissimo_simplicite'} {$colissimo_version}</h4>
             Une solution gratuite sans développement, facile à implémenter depuis votre back-office Prestashop.
             <ul>
                 <li>Une page de livraison « iframe » qui reste dans la continuité du site garantissant ainsi une continuité dans le processus d’achat.</li>
@@ -42,23 +42,23 @@
             </em>
         </div>
 
-        <div class="col-md-2 text-center subscribe">
-            <h5 class="text-branded">{l s='Subcribe to the Colissimo Simplicity offer' mod='socolissimo'}</h5>
-            {l s='By phone, Call' mod='socolissimo'}
+        <div class="col-lg-2 text-center subscribe">
+            <h5 class="text-branded">{l s='Subcribe to the Colissimo Simplicity offer' mod='colissimo_simplicite'}</h5>
+            {l s='By phone, Call' mod='colissimo_simplicite'}
             <h4 class="text-branded">3634</h4>
-            {l s='By using our' mod='socolissimo'}<br/>
-            <h6><a href="https://www.colissimo.entreprise.laposte.fr/fr/contact" target="_blank">{l s='Contact formula' mod='socolissimo'}</a></h6>
+            {l s='By using our' mod='colissimo_simplicite'}<br/>
+            <h6><a href="https://www.colissimo.entreprise.laposte.fr/fr/contact" target="_blank">{l s='Contact formula' mod='colissimo_simplicite'}</a></h6>
         </div>
-        <div class="col-md-3 text-center support">
-            <h4>{l s='Need support ?' mod='socolissimo'}</h4>
-            {l s='Don\'t hesitate to read the' mod='socolissimo'} 
-            <h5><a href="{$module_dir|escape:'htmlall'}/readme_fr.pdf" target="_blank"><b>{l s='Vendor manual' mod='socolissimo'}</b></a></h5> 
-            {l s='to help you to configure the module' mod='socolissimo'}<br/>
-            <p>{l s='You can also call the Hotline at' mod='socolissimo'}<br/>
+        <div class="col-lg-3 text-center support">
+            <h4>{l s='Need support ?' mod='colissimo_simplicite'}</h4>
+            {l s='Don\'t hesitate to read the' mod='colissimo_simplicite'} 
+            <h5><a href="{$module_dir|escape:'htmlall'}/readme_fr.pdf" target="_blank"><b>{l s='Vendor manual' mod='colissimo_simplicite'}</b></a></h5> 
+            {l s='to help you to configure the module' mod='colissimo_simplicite'}<br/>
+            <p>{l s='You can also call the Hotline at' mod='colissimo_simplicite'}<br/>
                 <strong class="text-branded">0825 086 005</strong><br/>
                 <em class="text-muted small">
-                    {l s='Monday to Friday, from 8am to 6pm.' mod='socolissimo'}. <br/>
-                    {l s='Say "Incident", and "Web Solutions" in the voice menu' mod='socolissimo'}
+                    {l s='Monday to Friday, from 8am to 6pm.' mod='colissimo_simplicite'}. <br/>
+                    {l s='Say "Incident", and "Web Solutions" in the voice menu' mod='colissimo_simplicite'}
                 </em>
             </p>
         </div>

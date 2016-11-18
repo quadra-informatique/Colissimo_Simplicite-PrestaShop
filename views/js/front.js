@@ -39,21 +39,31 @@ $(document).ready(function ()
             });
         }
     });
-    selectedCarrier();
+
+
     $('.delivery-option input:radio').each(function ()
     {
         if ($(this).val() == soCarrierId + ',') {
             $(this).parent().parent().parent().find('.carrier-price').html(initialCost_label + '<br/>' + initialCost + taxMention);
         }
     });
+
     $('.delivery-option input:radio').change(function () {
         selectedCarrier();
     });
+    selectedCarrier();
+
 });
 function redirect()
 {
     $('#soLink').attr('href', link_socolissimo + serialiseInput(soInputs));
     $("#soLink").trigger("click");
+    return false;
+}
+function redirect_mobile()
+{
+    $('#button_socolissimo').attr('href', link_socolissimo_mobile + serialiseInput(soInputs));
+    $("#button_socolissimo").trigger("click");
     return false;
 }
 

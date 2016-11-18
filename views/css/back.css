@@ -52,7 +52,7 @@
     margin-top:20px;
 }
 
-.colissimo-header #colissimo-logo,
+.colissimo-header .logo #colissimo-logo,
 .colissimo-about img {
     max-width: 100%;
     height: auto;
