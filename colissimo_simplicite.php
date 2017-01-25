@@ -164,9 +164,9 @@ class Colissimo_simplicite extends CarrierModule
             !Configuration::updateValue('COLISSIMO_SUP_URL', 'ws.colissimo.fr/supervision-pudo-frame/supervision.jsp') ||
             !Configuration::updateValue('COLISSIMO_SUP', true)
         ) {
-            include(dirname(__FILE__).'/sql/install.php');
+			return false;
         }
-
+		include(dirname(__FILE__).'/sql/install.php');
         return parent::install() &&
             $this->registerHook('header') &&
             $this->registerHook('backOfficeHeader') &&
