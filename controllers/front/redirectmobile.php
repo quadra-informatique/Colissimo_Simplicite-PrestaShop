@@ -26,7 +26,7 @@
 
 require_once _PS_MODULE_DIR_.'colissimo_simplicite/classes/SCFields.php';
 
-class SocolissimoRedirectmobileModuleFrontController extends ModuleFrontController
+class Colissimo_SimpliciteRedirectmobileModuleFrontController extends ModuleFrontController
 {
 
     public $ssl = true;
@@ -75,15 +75,15 @@ class SocolissimoRedirectmobileModuleFrontController extends ModuleFrontControll
         if (Configuration::get('PS_SSL_ENABLED')) {
             $protocol = 'https://';
         }
-        $socolissimo_url = $protocol.Configuration::get('SOCOLISSIMO_URL_MOBILE');
+        $colissimo_url = $protocol.Configuration::get('COLISSIMO_URL_MOBILE');
 
         Context::getContext()->smarty->assign(array(
             'inputs' => $inputs,
-            'socolissimo_url' => $socolissimo_url,
-            'logo' => Tools::getHttpHost(true).__PS_BASE_URI__.'modules/socolissimo/logo.gif',
-            'loader' => Tools::getHttpHost(true).__PS_BASE_URI__.'modules/socolissimo/views/img/ajax-loader.gif',
+            'colissimo_url' => $colissimo_url,
+            'logo' => Tools::getHttpHost(true).__PS_BASE_URI__.'modules/colissimo_simplicite/logo.gif',
+            'loader' => Tools::getHttpHost(true).__PS_BASE_URI__.'modules/colissimo_simplicite/views/img/ajax-loader.gif',
         ));
 
-        $this->setTemplate('redirect.tpl');
+        $this->setTemplate('module:colissimo_simplicite/views/templates/front/redirect.tpl');
     }
 }
