@@ -99,6 +99,7 @@ class Colissimo_SimpliciteValidationModuleFrontController extends ModuleFrontCon
         }
 		
 		// check if retrun country is allowed by shop
+		if (array_key_exists('PRPAYS',$return)) {
 			$iso_return = $return['PRPAYS'];
 		} else {
 			$iso_return = $return['CEPAYS'];
