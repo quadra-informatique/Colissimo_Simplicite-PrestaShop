@@ -262,7 +262,7 @@ class Colissimo_SimpliciteValidationModuleFrontController extends ModuleFrontCon
 	public function isAvailableReturnCountry($iso_code)
 	{
 		if ($iso_code) {
-			$carrier = new Carrier(Configuration::get('SOCOLISSIMO_CARRIER_ID'));
+			$carrier = new Carrier(Configuration::get('COLISSIMO_CARRIER_ID'));
 			$zones = $carrier->getZones();
 			$country = Country::getByIso($iso_code);
 			if ((int)$country && (int)$carrier->id) {

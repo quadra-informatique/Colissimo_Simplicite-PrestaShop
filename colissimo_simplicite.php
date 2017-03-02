@@ -133,12 +133,12 @@ class Colissimo_simplicite extends CarrierModule
             'COLISSIMO_SELLER_IMPACT'
         );
         $this->config_single_values_keys_exception = array(
-            'SOCOLISSIMO_PERSONAL_PHONE',
-            'SOCOLISSIMO_PERSONAL_ZIP_CODE',
-            'SOCOLISSIMO_PERSONAL_QUANTITIES',
-            'SOCOLISSIMO_PERSONAL_SIRET',
-            'SOCOLISSIMO_PERSONAL_DATA',
-            'SOCOLISSIMO_PERSONAL_ACCEPT'
+            'COLISSIMO_PERSONAL_PHONE',
+            'COLISSIMO_PERSONAL_ZIP_CODE',
+            'COLISSIMO_PERSONAL_QUANTITIES',
+            'COLISSIMO_PERSONAL_SIRET',
+            'COLISSIMO_PERSONAL_DATA',
+            'COLISSIMO_PERSONAL_ACCEPT'
         );
     }
 
@@ -1027,7 +1027,7 @@ class Colissimo_simplicite extends CarrierModule
             'trInter' => 1,
             'ceLang' => 'FR'
         );
-        if (!$inputs['dyForwardingChargesCMT'] && !Configuration::get('SOCOLISSIMO_COST_SELLER')) {
+        if (!$inputs['dyForwardingChargesCMT'] && !Configuration::get('COLISSIMO_COST_SELLER')) {
             unset($inputs['dyForwardingChargesCMT']);
         }
 
@@ -1173,7 +1173,7 @@ class Colissimo_simplicite extends CarrierModule
             is_module = 1,
             shipping_external = 1,
             need_range = 1,
-            external_module_name = "socolissimo"
+            external_module_name = "colissimo_simplicite"
             WHERE  id_carrier = '.(int)$id_socolissimo);
 
         // old carrier no longer linked with socolissimo
@@ -1390,7 +1390,7 @@ class Colissimo_simplicite extends CarrierModule
             $new_address->lastname = trim($this->formatName($lastname));
             $new_address->firstname = trim($this->formatName($firstname));
             $new_address->postcode = $colissimo_delivery_info->przipcode;
-            $new_address->city = $colissimo_delivery_info->prtown;
+            $new_address->city = str_replace('\'',' ',$colissimo_delivery_info->prtown);
             $new_address->id_country = $iso_code;
             $new_address->alias = 'Colissimo - '.date('d-m-Y');
             $new_address->phone_mobile = $colissimo_delivery_info->cephonenumber;
@@ -1412,7 +1412,7 @@ class Colissimo_simplicite extends CarrierModule
                 ((isset($colissimo_delivery_info->pradress1)) ? $new_address->other .= $colissimo_delivery_info->pradress1 : $new_address->other = '');
                 ((isset($colissimo_delivery_info->pradress4)) ? $new_address->other .= ' | '.$colissimo_delivery_info->pradress4 : $new_address->other = '');
                 $new_address->postcode = $colissimo_delivery_info->przipcode;
-                $new_address->city = $colissimo_delivery_info->prtown;
+                $new_address->city = str_replace('\'',' ',$colissimo_delivery_info->prtown);
                 $new_address->id_country = $iso_code;
                 $new_address->alias = 'Colissimo - '.date('d-m-Y');
                 $new_address->add();
