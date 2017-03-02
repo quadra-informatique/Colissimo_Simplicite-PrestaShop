@@ -45,7 +45,7 @@ $(document).ready(function ()
         onClosed: function () {
             $.ajax({
                 type: 'GET',
-                url: baseDir + '/modules/socolissimo/ajax.php',
+                url: baseDir + '/modules/colissimo_simplicite/ajax.php',
                 async: false,
                 cache: false,
                 dataType: "json",
