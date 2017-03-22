@@ -982,7 +982,8 @@ class Colissimo_simplicite extends CarrierModule
             }
         }
 
-
+		// town fix 
+		$town = str_replace('\'', ' ', Tools::substr($address_delivery->city, 0, 32));
         // Keep this fields order (see doc.)
         $inputs = array(
             'pudoFOId' => Configuration::get('COLISSIMO_ID'),
@@ -999,7 +1000,7 @@ class Colissimo_simplicite extends CarrierModule
             'ceAdress3' => $this->replaceAccentedChars(Tools::substr($address_delivery->address1, 0, 38)),
             'ceAdress4' => $this->replaceAccentedChars(Tools::substr($address_delivery->address2, 0, 38)),
             'ceZipCode' => $this->replaceAccentedChars($address_delivery->postcode),
-            'ceTown' => $this->replaceAccentedChars(Tools::substr($address_delivery->city, 0, 32)),
+            'ceTown' => $this->replaceAccentedChars($town),
             'ceEmail' => $this->replaceAccentedChars($params['cookie']->email),
             'cePhoneNumber' => $this->replaceAccentedChars(
                 str_replace(
