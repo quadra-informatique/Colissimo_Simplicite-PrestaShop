@@ -59,7 +59,7 @@ class Colissimo_simplicite extends CarrierModule
     {
         $this->name = 'colissimo_simplicite';
         $this->tab = 'shipping_logistics';
-        $this->version = '4.0.5';
+        $this->version = '4.0.6';
         $this->author = 'Quadra Informatique';
         $this->module_key = '8b991db851bdf7c64ca441f1a4481964';
         $this->need_instance = 1;
@@ -347,7 +347,7 @@ class Colissimo_simplicite extends CarrierModule
             'values' => array(
                 'query' => array(
                     array(
-                        'id' => 'DATA',
+                        'id' => 'ACCEPT',
                         'name' => $this->l('I accept that informations concerning the number of parcels are sent to our partner La poste - Colissimo'),
                         'val' => 1
                     ),
@@ -635,7 +635,7 @@ class Colissimo_simplicite extends CarrierModule
         }
         $reload_credit = false;
 
-        if (Configuration::get('COLISSIMO_PERSONAL_DATA')) {
+        if (Configuration::get('COLISSIMO_PERSONAL_ACCEPT')) {
             if (Tools::getValue('COLISSIMO_PERSONAL_PHONE') && (Tools::getValue('COLISSIMO_PERSONAL_PHONE') != Configuration::get('COLISSIMO_PERSONAL_PHONE'))) {
                 $reload_credit = true;
             }
@@ -650,7 +650,7 @@ class Colissimo_simplicite extends CarrierModule
             }
         }
 
-        if (!Configuration::get('COLISSIMO_PERSONAL_DATA') || $reload_credit) {
+        if (!Configuration::get('COLISSIMO_PERSONAL_ACCEPT') || $reload_credit) {
             if (!(bool)preg_match('#^(([\d]{2})([\s]){0,1}){5}$#', Tools::getValue('COLISSIMO_PERSONAL_PHONE'))) {
                 $this->context->controller->errors[] = $this->l('Phone number is incorrect');
             }
@@ -673,7 +673,7 @@ class Colissimo_simplicite extends CarrierModule
                 Configuration::updateValue('COLISSIMO_PERSONAL_SIRET', Tools::getValue('COLISSIMO_PERSONAL_SIRET'));
                 Configuration::updateValue('COLISSIMO_PERSONAL_ACCEPT', Tools::getValue('COLISSIMO_PERSONAL_ACCEPT'));
                 if ($this->savePreactivationRequest()) {
-                    Configuration::updateValue('COLISSIMO_PERSONAL_DATA', 1);
+                    Configuration::updateValue('COLISSIMO_PERSONAL_ACCEPT', 1);
                 }
             }
         }
