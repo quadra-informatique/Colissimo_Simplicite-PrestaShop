@@ -635,7 +635,7 @@ class Colissimo_simplicite extends CarrierModule
         }
         $reload_credit = false;
 
-        if (Configuration::get('COLISSIMO_PERSONAL_ACCEPT')) {
+        if (Configuration::get('COLISSIMO_PERSONAL_DATA')) {
             if (Tools::getValue('COLISSIMO_PERSONAL_PHONE') && (Tools::getValue('COLISSIMO_PERSONAL_PHONE') != Configuration::get('COLISSIMO_PERSONAL_PHONE'))) {
                 $reload_credit = true;
             }
@@ -650,7 +650,7 @@ class Colissimo_simplicite extends CarrierModule
             }
         }
 
-        if (!Configuration::get('COLISSIMO_PERSONAL_ACCEPT') || $reload_credit) {
+        if (!Configuration::get('COLISSIMO_PERSONAL_DATA') || $reload_credit) {
             if (!(bool)preg_match('#^(([\d]{2})([\s]){0,1}){5}$#', Tools::getValue('COLISSIMO_PERSONAL_PHONE'))) {
                 $this->context->controller->errors[] = $this->l('Phone number is incorrect');
             }
@@ -673,7 +673,7 @@ class Colissimo_simplicite extends CarrierModule
                 Configuration::updateValue('COLISSIMO_PERSONAL_SIRET', Tools::getValue('COLISSIMO_PERSONAL_SIRET'));
                 Configuration::updateValue('COLISSIMO_PERSONAL_ACCEPT', Tools::getValue('COLISSIMO_PERSONAL_ACCEPT'));
                 if ($this->savePreactivationRequest()) {
-                    Configuration::updateValue('COLISSIMO_PERSONAL_ACCEPT', 1);
+                    Configuration::updateValue('COLISSIMO_PERSONAL_DATA', 1);
                 }
             }
         }
