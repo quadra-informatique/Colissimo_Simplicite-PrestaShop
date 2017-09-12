@@ -164,9 +164,9 @@ class Colissimo_simplicite extends CarrierModule
             !Configuration::updateValue('COLISSIMO_SUP_URL', 'ws.colissimo.fr/supervision-pudo-frame/supervision.jsp') ||
             !Configuration::updateValue('COLISSIMO_SUP', true)
         ) {
-			return false;
+            return false;
         }
-		include(dirname(__FILE__).'/sql/install.php');
+        include(dirname(__FILE__).'/sql/install.php');
         return parent::install() &&
             $this->registerHook('header') &&
             $this->registerHook('backOfficeHeader') &&
@@ -851,7 +851,6 @@ class Colissimo_simplicite extends CarrierModule
 										  AND cl.id_country = c.id_country WHERE iso_code = "'.pSQL($delivery_infos->cecountry).'"');
             $name_country = $sql['name'];
             if (((int)$order_carrier->id_reference == (int)$so_carrier->id_reference) && $delivery_infos->id) {
-
                 $sc_fields = new SCFields($delivery_infos->delivery_mode);
 
                 switch ($sc_fields->delivery_mode) {
@@ -982,8 +981,8 @@ class Colissimo_simplicite extends CarrierModule
             }
         }
 
-		// town fix 
-		$town = str_replace('\'', ' ', Tools::substr($address_delivery->city, 0, 32));
+        // town fix
+        $town = str_replace('\'', ' ', Tools::substr($address_delivery->city, 0, 32));
         // Keep this fields order (see doc.)
         $inputs = array(
             'pudoFOId' => Configuration::get('COLISSIMO_ID'),
@@ -1302,11 +1301,14 @@ class Colissimo_simplicite extends CarrierModule
             '!',
             '°',
             '²',
-            '"');
+            '"',
+            );
         foreach ($array_unauthorised_api as $key => $value) {
             $str = str_replace($value, '', $str);
         }
+        $str = str_replace('\'', ' ', $str);
         $str = preg_replace('/\s+/', ' ', $str);
+        
         return $str;
     }
 
@@ -1391,7 +1393,7 @@ class Colissimo_simplicite extends CarrierModule
             $new_address->lastname = trim($this->formatName($lastname));
             $new_address->firstname = trim($this->formatName($firstname));
             $new_address->postcode = $colissimo_delivery_info->przipcode;
-            $new_address->city = str_replace('\'',' ',$colissimo_delivery_info->prtown);
+            $new_address->city = str_replace('\'', ' ', $colissimo_delivery_info->prtown);
             $new_address->id_country = $iso_code;
             $new_address->alias = 'Colissimo - '.date('d-m-Y');
             $new_address->phone_mobile = $colissimo_delivery_info->cephonenumber;
@@ -1413,7 +1415,7 @@ class Colissimo_simplicite extends CarrierModule
                 ((isset($colissimo_delivery_info->pradress1)) ? $new_address->other .= $colissimo_delivery_info->pradress1 : $new_address->other = '');
                 ((isset($colissimo_delivery_info->pradress4)) ? $new_address->other .= ' | '.$colissimo_delivery_info->pradress4 : $new_address->other = '');
                 $new_address->postcode = $colissimo_delivery_info->przipcode;
-                $new_address->city = str_replace('\'',' ',$colissimo_delivery_info->prtown);
+                $new_address->city = str_replace('\'', ' ', $colissimo_delivery_info->prtown);
                 $new_address->id_country = $iso_code;
                 $new_address->alias = 'Colissimo - '.date('d-m-Y');
                 $new_address->add();
