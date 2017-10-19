@@ -93,9 +93,9 @@ function redirect_mobile()
 }
 
 function selectedCarrier() {
-    if ($('.delivery-option input:radio:checked').val() == soCarrierId + ',')
+    if ($("input[name*='delivery_option[']:checked").val() == soCarrierId + ',')
     {
-        $('.delivery-option input:radio:checked').parent().parent().parent().find('.carrier-extra-content').show();
+        $("input[name*='delivery_option[']:checked").parent().parent().parent().find('.carrier-extra-content').show();
         $('#button_socolissimo').show();
     }
     else {
