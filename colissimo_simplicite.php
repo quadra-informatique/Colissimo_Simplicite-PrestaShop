@@ -933,18 +933,22 @@ class Colissimo_simplicite extends CarrierModule
         }
 
         $tax_rate = Tax::getCarrierTaxRate($id_carrier, isset($params['cart']->id_address_delivery) ? $params['cart']->id_address_delivery : null);
-        $std_cost_with_taxes = number_format((float)$this->initial_cost * (1 + ($tax_rate / 100)), 2, ',', ' ');
+        $std_cost_with_taxes_float = (float)$this->initial_cost * (1 + ($tax_rate / 100));
+		$std_cost_with_taxes_str = number_format($std_cost_with_taxes_float, 2, ',', ' ');
 
-        $seller_cost_with_taxes = 0;
+        $seller_cost_with_taxes_float = 0;
+		$seller_cost_with_taxes_str = "";
         if (Configuration::get('COLISSIMO_COST_SELLER')) {
             if (Configuration::get('COLISSIMO_COST_IMPACT')) {
-                $seller_cost_with_taxes = $std_cost_with_taxes + number_format((float)Configuration::get('COLISSIMO_SELLER_AMOUNT'), 2, ',', ' ');
+                $seller_cost_with_taxes_float = (float)Configuration::get('COLISSIMO_SELLER_AMOUNT') + $std_cost_with_taxes_float;
             } else {
-                $seller_cost_with_taxes = $std_cost_with_taxes - number_format((float)Configuration::get('COLISSIMO_SELLER_AMOUNT'), 2, ',', ' ');
-                if ((float)$seller_cost_with_taxes < 0) {
-                    $seller_cost_with_taxes = 0;
+                $seller_cost_with_taxes_float = $std_cost_with_taxes_float - (float)Configuration::get('COLISSIMO_SELLER_AMOUNT');
+                if ($seller_cost_with_taxes_float < 0) {
+                    $seller_cost_with_taxes_float = 0;
                 }
             }
+			
+			$seller_cost_with_taxes_str = number_format($seller_cost_with_taxes_float, 2, ',', ' ');
         }
 
         $free_shipping = false;
@@ -988,8 +992,8 @@ class Colissimo_simplicite extends CarrierModule
             'pudoFOId' => Configuration::get('COLISSIMO_ID'),
             'ceName' => $this->replaceAccentedChars(Tools::substr($address_delivery->lastname, 0, 34)),
             'dyPreparationTime' => (int)Configuration::Get('COLISSIMO_PREPARATION_TIME'),
-            'dyForwardingCharges' => $std_cost_with_taxes,
-            'dyForwardingChargesCMT' => $seller_cost_with_taxes,
+            'dyForwardingCharges' => $std_cost_with_taxes_str,
+            'dyForwardingChargesCMT' => $seller_cost_with_taxes_str,
             'trClientNumber' => (int)$address_delivery->id_customer,
             'orderId' => $this->formatOrderId((int)$address_delivery->id),
             'numVersion' => $this->api_num_version,
@@ -1038,9 +1042,9 @@ class Colissimo_simplicite extends CarrierModule
         $inputs['signature'] = $this->generateKey($inputs);
 
         // calculate lowest cost
-        $from_cost = $std_cost_with_taxes;
-        if (($seller_cost_with_taxes < $std_cost_with_taxes ) && Configuration::get('COLISSIMO_COST_SELLER')) {
-            $from_cost = $seller_cost_with_taxes;
+        $from_cost = $std_cost_with_taxes_str;
+        if (($seller_cost_with_taxes_float < $std_cost_with_taxes_float ) && Configuration::get('COLISSIMO_COST_SELLER')) {
+            $from_cost = $seller_cost_with_taxes_str;
         }
         $rewrite_active = true;
         if (!Configuration::get('PS_REWRITING_SETTINGS')) {
