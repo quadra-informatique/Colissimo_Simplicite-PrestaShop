@@ -685,6 +685,25 @@ class Colissimo_simplicite extends CarrierModule
         if (!$this->context->cart instanceof Cart || !$this->context->cart->id) {
             $this->context->cart = new Cart($params->id);
         }
+		
+		 // check colissimopass module installed and used
+        if (Module::isEnabled('colissimopass')) {
+            // is user connect ?
+            require_once(_PS_MODULE_DIR_.'colissimopass/classes/ColissimoPassUser.php');
+            if (ColissimoPassUser::isActive()) {
+                return 0;
+            }
+            // is product pass in cart ?
+            $cart = $this->context->cart;
+            $products = $cart->getProducts();
+            if (is_array($products)) {
+                foreach ($products as $product) {
+                    if ($product['id_product'] == (int)Configuration::get('ID_COLISSIMO_PASS_PDT')) {
+                        return 0;
+                    }
+                }
+            }
+        }
 
         if (!$this->initial_cost) {
             $this->initial_cost = $shipping_cost;
@@ -818,6 +837,14 @@ class Colissimo_simplicite extends CarrierModule
         $order->id_address_delivery = $this->isSameAddress((int)$order->id_address_delivery, (int)$order->id_cart, (int)$order->id_customer);
         $order->update();
         Configuration::updateValue('COLISSIMO_CONFIGURATION_OK', true);
+		
+		if (Module::isEnabled('colissimopass')) {
+            // is user connect ?
+            require_once(_PS_MODULE_DIR_.'colissimopass/colissimopass.php');
+            if (ColissimoPassUser::isActive()) {
+                Colissimopass::sendConsignment($order);
+            }
+        }
     }
 
     public function hookAdminOrder($params)
