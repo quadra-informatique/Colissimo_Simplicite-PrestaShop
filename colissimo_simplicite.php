@@ -1211,7 +1211,9 @@ class Colissimo_simplicite extends CarrierModule
         Db::getInstance()->execute('UPDATE '._DB_PREFIX_.'carrier SET
             is_module = 0,
             external_module_name = ""
-            WHERE  id_carrier NOT IN ( '.(int)Configuration::get('COLISSIMO_CARRIER_ID').')');
+            WHERE  id_carrier NOT IN ('.(int)Configuration::get('COLISSIMO_CARRIER_ID').')
+            AND external_module_name = "colissimo_simplicite"
+        ');
     }
 
     /**
