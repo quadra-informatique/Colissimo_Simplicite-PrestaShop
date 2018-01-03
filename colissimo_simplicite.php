@@ -59,7 +59,7 @@ class Colissimo_simplicite extends CarrierModule
     {
         $this->name = 'colissimo_simplicite';
         $this->tab = 'shipping_logistics';
-        $this->version = '4.0.9';
+        $this->version = '4.0.10';
         $this->author = 'Quadra Informatique';
         $this->module_key = '8b991db851bdf7c64ca441f1a4481964';
         $this->need_instance = 1;
@@ -685,8 +685,7 @@ class Colissimo_simplicite extends CarrierModule
         if (!$this->context->cart instanceof Cart || !$this->context->cart->id) {
             $this->context->cart = new Cart($params->id);
         }
-		
-		 // check colissimopass module installed and used
+        // check colissimopass module installed and used
         if (Module::isEnabled('colissimopass')) {
             // is user connect ?
             require_once(_PS_MODULE_DIR_.'colissimopass/classes/ColissimoPassUser.php');
@@ -837,8 +836,8 @@ class Colissimo_simplicite extends CarrierModule
         $order->id_address_delivery = $this->isSameAddress((int)$order->id_address_delivery, (int)$order->id_cart, (int)$order->id_customer);
         $order->update();
         Configuration::updateValue('COLISSIMO_CONFIGURATION_OK', true);
-		
-		if (Module::isEnabled('colissimopass')) {
+        
+        if (Module::isEnabled('colissimopass')) {
             // is user connect ?
             require_once(_PS_MODULE_DIR_.'colissimopass/colissimopass.php');
             if (ColissimoPassUser::isActive()) {
@@ -961,10 +960,10 @@ class Colissimo_simplicite extends CarrierModule
 
         $tax_rate = Tax::getCarrierTaxRate($id_carrier, isset($params['cart']->id_address_delivery) ? $params['cart']->id_address_delivery : null);
         $std_cost_with_taxes_float = (float)$this->initial_cost * (1 + ($tax_rate / 100));
-		$std_cost_with_taxes_str = number_format($std_cost_with_taxes_float, 2, ',', ' ');
+        $std_cost_with_taxes_str = number_format($std_cost_with_taxes_float, 2, ',', ' ');
 
         $seller_cost_with_taxes_float = 0;
-		$seller_cost_with_taxes_str = "";
+        $seller_cost_with_taxes_str = '';
         if (Configuration::get('COLISSIMO_COST_SELLER')) {
             if (Configuration::get('COLISSIMO_COST_IMPACT')) {
                 $seller_cost_with_taxes_float = (float)Configuration::get('COLISSIMO_SELLER_AMOUNT') + $std_cost_with_taxes_float;
@@ -974,8 +973,7 @@ class Colissimo_simplicite extends CarrierModule
                     $seller_cost_with_taxes_float = 0;
                 }
             }
-			
-			$seller_cost_with_taxes_str = number_format($seller_cost_with_taxes_float, 2, ',', ' ');
+            $seller_cost_with_taxes_str = number_format($seller_cost_with_taxes_float, 2, ',', ' ');
         }
 
         $free_shipping = false;
