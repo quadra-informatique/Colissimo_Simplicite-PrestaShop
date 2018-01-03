@@ -1058,7 +1058,7 @@ class Colissimo_simplicite extends CarrierModule
             'trInter' => 1,
             'ceLang' => 'FR'
         );
-        if (!$inputs['dyForwardingChargesCMT'] && !Configuration::get('COLISSIMO_COST_SELLER')) {
+        if (isset($inputs['dyForwardingChargesCMT']) && !$inputs['dyForwardingChargesCMT'] && !Configuration::get('COLISSIMO_COST_SELLER')) {
             unset($inputs['dyForwardingChargesCMT']);
         }
 
