@@ -41,12 +41,13 @@
     {else}
         <div class="waiting_colissimo">
             <img src="{$logo|escape:'htmlall':'UTF-8'}" />
-            <span>{l s='You will be redirect to shop in few moment' mod='colissimo_simplicite'}</span>
+            <span>{l s='You will be redirect to shop in few moment. If it is not the case, please click button.' mod='colissimo_simplicite'}</span>
             <img src="{$loader|escape:'htmlall':'UTF-8'}" /></div>
         <form name="myform" id="myformredirect" method="post" action="{$so_url_back|escape:'htmlall':'UTF-8'}">
             <input type="hidden" name="delivery_option[{$id_address|escape:'htmlall':'UTF-8'}]" id="delivery_option_{$id_so|escape:'htmlall':'UTF-8'}" value="{$id_so|escape:'htmlall':'UTF-8'},">
             <input type="hidden" name="confirmDeliveryOption" value="1">
-            <input class="hidden" type="submit">
+            <!--<input class="hidden" type="submit">-->
+            <input type="submit" value="Envoyer" />
         </form>
     {/if}
 {/block}
