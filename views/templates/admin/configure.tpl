@@ -28,6 +28,12 @@
             <img src="{$module_dir|escape:'html':'UTF-8'}views/img/colissimo.png" id="colissimo-logo" />
         </div>
         <div class="col-lg-6 about">
+             <h4>{l s='Novelty Colissimo : Front page withdrawal point' mod='colissimo_simplicite'} {$colissimo_version|escape:'htmlall':'UTF-8'}</h4>
+            <ul>
+                <li>La solution clé en main proposant la livraison en France et en Europe.</li>
+                <li> Une personnalisation en harmonie avec le design de votre site.</li>
+                <li> une solution responsive design disponible en 7 langues. </li> 
+            </ul>
             <h4>{l s='About Socolissimo Simplicité' mod='colissimo_simplicite'} {$colissimo_version|escape:'htmlall':'UTF-8'}</h4>
             Une solution gratuite sans développement, facile à implémenter depuis votre back-office Prestashop.
             <ul>

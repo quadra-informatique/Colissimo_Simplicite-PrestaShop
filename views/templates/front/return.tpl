@@ -46,8 +46,7 @@
         <form name="myform" id="myformredirect" method="post" action="{$so_url_back|escape:'htmlall':'UTF-8'}">
             <input type="hidden" name="delivery_option[{$id_address|escape:'htmlall':'UTF-8'}]" id="delivery_option_{$id_so|escape:'htmlall':'UTF-8'}" value="{$id_so|escape:'htmlall':'UTF-8'},">
             <input type="hidden" name="confirmDeliveryOption" value="1">
-            <!--<input class="hidden" type="submit">-->
-            <input type="submit" value="{l s='Continue'}" />
+            <input type="submit" value="{l s='Continue' mod='colissimo_simplicite'}" />
         </form>
     {/if}
 {/block}

@@ -25,7 +25,8 @@
  */
 
 $sql = array(
-    'DROP TABLE IF EXISTS `'._DB_PREFIX_.'socolissimo_delivery_info`');
+    'DROP TABLE IF EXISTS `'._DB_PREFIX_.'colissimo_delivery_info`',
+    'DROP TABLE IF EXISTS `'._DB_PREFIX_.'colissimo_delivery_point`');
 
 foreach ($sql as $query) {
     if (Db::getInstance()->execute($query) == false) {
