@@ -456,6 +456,24 @@ class Colissimo_simplicite extends CarrierModule
         );
         $form['input'][] = array(
             'tab' => 'system',
+            'col' => 3,
+            'type' => 'text',
+            'required' => true,
+            'label' => $this->l('Url web service la poste'),
+            'name' => 'COLISSIMO_WS_URL',
+            'desc' => $this->l('Url of web service la poste')
+        );    
+        $form['input'][] = array(
+            'tab' => 'system',
+            'col' => 3,
+            'type' => 'text',
+            'required' => true,
+            'label' => $this->l('Url authentification Point de retrait'),
+            'name' => 'COLISSIMO_URL_POINTDERETRAIT',
+            'desc' => $this->l('Url of point de retrait option')
+        );   
+        $form['input'][] = array(
+            'tab' => 'system',
             'type' => 'switch',
             'label' => $this->l('Supervision'),
             'name' => 'COLISSIMO_SUP',
