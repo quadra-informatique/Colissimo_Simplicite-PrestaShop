@@ -920,6 +920,7 @@ class Colissimo_simplicite extends CarrierModule
     {
         if (isset($this->context->controller->page_name) && $this->context->controller->page_name == "checkout") {
             if (Configuration::get('COLISSIMO_USE_POINTDERETRAIT')) {
+				$this->context->controller->addJS('https://code.jquery.com/jquery-3.2.1.min.js');
                 $this->context->controller->addJS($this->_path.'views/js/jquery.frameColiposte.js');
                 $this->context->controller->addJS($this->_path.'views/js/front_delivery_point.js');
             } else {
