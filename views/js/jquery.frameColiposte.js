@@ -149,12 +149,12 @@ jQuery.extend(jQuery.fn, {
             data: 'h1=' + lang + '&callBackFrame=' + callBackFrame + '&domain=' + urlColiposte + '&ceCountryList=' + params.ceCountryList + '&codeRetour=' + codeRetour + '&dyPreparationTime=' + params.dyPreparationTime + '&ceCountry=' + params.ceCountry + '&ceZipCode=' + params.ceZipCode + '&token=' + params.token,
             success: function (data) {
                 colissimo('#widget-container').html(data);
-
-                if (params.ceCountry != null && params.ceCountry != '')
-                {
-                    colissimo("#listePays").attr('value', params.ceCountry);
-                }
-
+				if (params.ceCountry != null && params.ceCountry != '')
+                    { setTimeout(function () {
+                             colissimo("#listePays").val(params.ceCountry);
+                        }, 1000)
+                       
+                    }
                 setTimeout(function () {
                     if (params.ceAddress != null && params.ceAddress != '')
                     {
