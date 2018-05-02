@@ -93,13 +93,15 @@ function redirect_mobile()
 }
 
 function selectedCarrier() {
-    if ($('.delivery-option input:radio:checked').val() == soCarrierId + ',')
-    {
-        $('.delivery-option input:radio:checked').parent().parent().parent().find('.carrier-extra-content').show();
-        $('#button_socolissimo').show();
-    }
-    else {
-        $('#button_socolissimo').hide();
+    if(typeof soCarrierId !== 'undefined') {
+        if ($('.delivery-option input:radio:checked').val() == soCarrierId + ',')
+        {
+            $('.delivery-option input:radio:checked').parent().parent().parent().find('.carrier-extra-content').show();
+            $('#button_socolissimo').show();
+        }
+        else {
+            $('#button_socolissimo').hide();
+        }
     }
 }
 function serialiseInput(inputs)
