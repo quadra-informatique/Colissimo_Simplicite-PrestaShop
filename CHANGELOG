@@ -22,7 +22,10 @@
  *  @license    http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
  *  International Registered Trademark & Property of La Poste SA
  */
- # 4.0.11
+# 4.0.12
+[-] MO : fix bug socarriedId not defined
+
+# 4.0.11
 [-] MO : adding free card delivery point option
 
  # 4.0.10
