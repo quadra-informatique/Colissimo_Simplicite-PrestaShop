@@ -1089,7 +1089,8 @@ class Colissimo_simplicite extends CarrierModule
 
     public function hookDisplayCarrierExtraContent($params)
     {
-        
+        $have_selected_point = false;
+        $colissimo_delivery_info = false;
         $carrier_so = new Carrier((int)Configuration::get('COLISSIMO_CARRIER_ID'));
 
         if (!isset($carrier_so) || !$carrier_so->active) {
@@ -1189,6 +1190,12 @@ class Colissimo_simplicite extends CarrierModule
         $town = str_replace('\'', ' ', Tools::substr($address_delivery->city, 0, 32));
         $wsUrl = Configuration::get('COLISSIMO_WS_URL');
         if (Configuration::get('COLISSIMO_USE_POINTDERETRAIT')) {
+            if ((int)ColissimoDeliveryPoint::alreadyExists($this->context->cart->id, $this->context->customer->id)) {
+                $have_selected_point = true;
+                $colissimo_delivery_info = new ColissimoDeliveryPoint((int)ColissimoDeliveryPoint::alreadyExists($this->context->cart->id, $this->context->customer->id));
+            } else {
+                $colissimo_delivery_info = new ColissimoDeliveryPoint();
+            }
             $token = Configuration::get('COLISSIMO_TOKEN_POINTDERETRAIT');
             $token_update_date = Configuration::get('COLISSIMO_PDR_TOKEN_HOUR');
             $now = time();
@@ -1329,6 +1336,9 @@ class Colissimo_simplicite extends CarrierModule
             'link_to_img' => $this->link_to_img,
             'wsUrl' => $protocol.$wsUrl,
             'baseUrl' => $base_url,
+            'msg_order_carrier_colissimo' => $this->l('Before proceding, you must select relay point first.'),
+            'have_selected_point' => (int)$have_selected_point,
+            'relay_info' => $colissimo_delivery_info
         ));
         if (Configuration::get('COLISSIMO_USE_POINTDERETRAIT')) {
             return $this->display(__FILE__, 'colissimo_delivery_point.tpl');

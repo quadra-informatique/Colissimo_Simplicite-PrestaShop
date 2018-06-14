@@ -25,6 +25,15 @@
 
 $(document).ready(function ()
 {
+    $('button[name=confirmDeliveryOption]').click(function(e){
+        if ($('.delivery-option input:radio:checked').val() == soCarrierId + ',') {
+            var have_selected_point = parseInt($('#have_selected_point').val());
+            if (!have_selected_point) {
+                alert(msg_order_carrier_colissimo);
+                e.preventDefault();
+            }
+        }
+    });
     /* iframe génération */
     /* hidding iframe if carrier Colissimo Simplicité is not selected */
 

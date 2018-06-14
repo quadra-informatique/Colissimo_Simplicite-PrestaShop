@@ -48,6 +48,10 @@ $_MODULE['<{colissimo_simplicite}prestashop>colissimo_simplicite_c1f03f22a877607
 $_MODULE['<{colissimo_simplicite}prestashop>colissimo_simplicite_5e8487dd7c11bb1c553c7ecee3d82d1a'] = 'URL de la page Colissimo Simplicité';
 $_MODULE['<{colissimo_simplicite}prestashop>colissimo_simplicite_9abdbf15f57390e082b3dedc95a2d55f'] = 'Adresse FO Mobile';
 $_MODULE['<{colissimo_simplicite}prestashop>colissimo_simplicite_caa6da3490008582fce39f86a7cc00b9'] = 'URL de la page Colissimo Simplicité Mobile. Les clients naviguant avec des smartphones ou Ipad seront redirigés sur cette url. Attention cette url n\'autorise pas la livraison en Belgique pour le moment.';
+$_MODULE['<{colissimo_simplicite}prestashop>colissimo_simplicite_d3fc8dca382e8201c0214a88285f05cc'] = 'Url Webservice LaPoste';
+$_MODULE['<{colissimo_simplicite}prestashop>colissimo_simplicite_1c05dfa6e3e5f5cfea8c643f38dc68c6'] = 'Url Webservice LaPoste';
+$_MODULE['<{colissimo_simplicite}prestashop>colissimo_simplicite_c8582cb9cdbfd43e9d637ec7705663d9'] = 'Url service authentification Point de retrait';
+$_MODULE['<{colissimo_simplicite}prestashop>colissimo_simplicite_b758ba37899439a5f87a2ce25dd6e8a3'] = 'Url de l\'option Point de retrait';
 $_MODULE['<{colissimo_simplicite}prestashop>colissimo_simplicite_85068ddf0b9bcbb6913008356fe328a0'] = 'Supervision';
 $_MODULE['<{colissimo_simplicite}prestashop>colissimo_simplicite_acd0f52aa3b63581312e2d7caa6c6206'] = 'Autoriser ou non la vérification de la disponibilité des services Colissimo.';
 $_MODULE['<{colissimo_simplicite}prestashop>colissimo_simplicite_00d23a76e43b46dae9ec7aa9dcbebb32'] = 'Activé';
@@ -93,6 +97,7 @@ $_MODULE['<{colissimo_simplicite}prestashop>colissimo_simplicite_efc5b392834c632
 $_MODULE['<{colissimo_simplicite}prestashop>colissimo_simplicite_898d22b4259367825dbbbc174f049197'] = 'Choisir un mode de livraison';
 $_MODULE['<{colissimo_simplicite}prestashop>colissimo_simplicite_6e55ec92b403f0ab31c29f62c837834a'] = 'Modifier le mode de livraison';
 $_MODULE['<{colissimo_simplicite}prestashop>colissimo_simplicite_7ea4eac85d1d1967562869cf1e14b1d0'] = 'Pour choisir Colissimo, cochez une méthode de livraison';
+$_MODULE['<{colissimo_simplicite}prestashop>colissimo_simplicite_735237a7b87ccf7027107701c1ca546e'] = 'Avant de continuer, vous devez choisir un point de livraison.';
 $_MODULE['<{colissimo_simplicite}prestashop>scerror_09456f1fe3dbf4b7bbc3281e6cfcce8f'] = 'L\'ID FO est manquant';
 $_MODULE['<{colissimo_simplicite}prestashop>scerror_d157bc2bca42ee803c4d5682833447e8'] = 'Mauvais ID FO';
 $_MODULE['<{colissimo_simplicite}prestashop>scerror_078d62fe16fd18fb1290b7eddd5c692e'] = 'L\'accès client a été refusé';
@@ -147,6 +152,15 @@ $_MODULE['<{colissimo_simplicite}prestashop>configure_3a7b1fc8062a2030261cf6ac02
 $_MODULE['<{colissimo_simplicite}prestashop>configure_warning_b28a56259e5b5fee9ac2077b0fc629af'] = 'Vous devez renseigner la partie \"Informations marchand\" pour activer le module en front office.';
 $_MODULE['<{colissimo_simplicite}prestashop>colissimo_delivery_point_e9c2fa1e3934b1629647e1f1a99a6034'] = 'Votre point de livraison a bien été enregistré.';
 $_MODULE['<{colissimo_simplicite}prestashop>colissimo_delivery_point_a5a742bf22c66ffb1664b811442ad600'] = 'Une erreur est survenue. Le service est temporairement inaccessible. Veuillez vérifier la validité de vos identifiants Colissimo ou réessayer plus tard.';
+$_MODULE['<{colissimo_simplicite}prestashop>colissimo_delivery_point_34b09dd64c31984b70a1fe476464e396'] = 'Vous serez livré à l\'adresse suivante :';
+$_MODULE['<{colissimo_simplicite}prestashop>colissimo_delivery_point_19c423df1b6283bde93d6fdd3766f113'] = 'Horaires ouverture :';
+$_MODULE['<{colissimo_simplicite}prestashop>colissimo_delivery_point_62846f7c7ceac82af817e8ca58d1fecd'] = 'Lundi :';
+$_MODULE['<{colissimo_simplicite}prestashop>colissimo_delivery_point_d2983aaa76b6a68062a674463e6affa8'] = 'Mardi :';
+$_MODULE['<{colissimo_simplicite}prestashop>colissimo_delivery_point_48edae2c85faece587a2f25147a36ef1'] = 'Mercredi :';
+$_MODULE['<{colissimo_simplicite}prestashop>colissimo_delivery_point_8ff90043f9fb62efd669d031080a1ebc'] = 'Jeudi :';
+$_MODULE['<{colissimo_simplicite}prestashop>colissimo_delivery_point_a79209d2bf82356530d7a8512c3dbc87'] = 'Vendredi :';
+$_MODULE['<{colissimo_simplicite}prestashop>colissimo_delivery_point_71ab074a43559f06d89a53cd0cf9fa3b'] = 'Samedi :';
+$_MODULE['<{colissimo_simplicite}prestashop>colissimo_delivery_point_a8fa954485e0b6cdc1914793113702cb'] = 'Dimanche :';
 $_MODULE['<{colissimo_simplicite}prestashop>redirect_375c2512d931d15da65f437c3d1e86de'] = 'Vous allez être rédirigé vers la boutique dans un moment. Si ce n\'est pas le cas, cliquez sur le bouton.';
 $_MODULE['<{colissimo_simplicite}prestashop>return_8d0c48c639b60e3768d0b095e8075771'] = 'Liste des erreurs colissimo :';
 $_MODULE['<{colissimo_simplicite}prestashop>return_0557fa923dcee4d0f86b1409f5c2167f'] = 'Revenir à la boutique';

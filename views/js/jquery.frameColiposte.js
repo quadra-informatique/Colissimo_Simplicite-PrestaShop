@@ -32,7 +32,16 @@ function saveDeliveryPoint(point, moduleLink) {
         success: function (data) {
             $('#checkout-delivery-step .content').show();
             var msg = $('#widget-conf-message').val();
-            displayConfDelivery(msg);
+            //displayConfDelivery(msg);
+            $('#have_selected_point').val('1');
+            if (typeof(updatePaymentMethodsDisplay) !== 'undefined')
+						updatePaymentMethodsDisplay();
+
+            $('.relay-info-title').html(point.nom);
+            $('.relay-info-address').html(point.adresse1);
+            $('.relay-info-city').html(point.codePostal+ ' '+ point.localite);
+            $('.choice-info').show();
+            $('.choice-info').focus();
             
         },
         error: function (data) {
