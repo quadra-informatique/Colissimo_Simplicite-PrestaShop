@@ -51,10 +51,11 @@ $(document).ready(function ()
             generateMap();
         }
     });
-    if ($('.delivery-option input:radio:checked').val() == soCarrierId + ',') {
-        if (!$('#widget-container').html()) {
-            generateMap();
-        }
+    if(typeof soCarrierId !== 'undefined') {
+        if ($('.delivery-option input:radio:checked').val() == soCarrierId + ',') {
+            if (!$('#widget-container').html()) {
+                generateMap();
+            }
         /* if (!$('#widget-container').length) {
          $('#footer').append('<div id="widget-container" class="col-xs-12"></div>');
          generateMap();
@@ -64,7 +65,8 @@ $(document).ready(function ()
          } else {
          //$('.delivery-option input:radio').change(function () {
          $('#footer').append($('#widget-container'));
-         //});*/
+        //});*/
+        }
     }
 });
 var generateMap = function () {
