@@ -22,6 +22,12 @@
  *  @license    http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
  *  International Registered Trademark & Property of La Poste SA
  */
+# 4.0.13 
+[-] MO : add relay information & force choose relay
+Fix company of the address table with cecompanyname of the colissimo_…
+soCarrierId undefined in front_delivery_point
+Fix display trouble in Front Page
+
 # 4.0.12
 [-] MO : fix bug socarriedId not defined
 
