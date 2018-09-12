@@ -65,6 +65,30 @@ $(document).ready(function ()
         }
     });
 
+    /**
+    * Cette fonction vérifie si un mode de transport a été sélectionné.
+    * Bloque le bouton continuer sinon.
+    */
+    $('button[name=confirmDeliveryOption]').click(function(e){
+        carrier = 'input[id=delivery_option_' + soCarrierId + ']:radio:checked';
+        if ($(carrier).val() == soCarrierId + ',') {
+            $.ajax({
+                type: 'POST',
+                url: deliveryModeUrl,
+                async: false,
+                cache: false,
+                success: function (jsonData) {
+                    if (!jsonData) {
+                        alert(msg_order_carrier_colissimo);
+                        e.preventDefault();
+                    }
+                },
+                error: function (XMLHttpRequest, textStatus, errorThrown) {
+                    alert('TECHNICAL ERROR\nDetails:\nError thrown: ' + XMLHttpRequest + '\n' + 'Text status: ' + textStatus);
+                }
+            });
+        }
+    });
 
     $('.delivery-option input:radio').each(function ()
     {

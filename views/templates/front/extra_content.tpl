@@ -36,6 +36,8 @@
     var initialCost = "{$initialCost|escape:'htmlall':'UTF-8'}";
     var taxMention = "{$taxMention|escape:'htmlall':'UTF-8'}";
     var rewriteActive = '{$rewrite_active|escape:'htmlall':'UTF-8'}';
+    var msg_order_carrier_colissimo="{$msg_order_carrier_colissimo|escape:'htmlall':'UTF-8'}";
+    var deliveryModeUrl = "{url entity='module' name='colissimo_simplicite' controller='Deliverymode' params=[action => 'isSelected']}";
     {foreach from = $inputs item = input key = name name = myLoop}
     soInputs.{$name|escape:'htmlall':'UTF-8'} = "{$input|strip_tags|addslashes}";
     {/foreach}
