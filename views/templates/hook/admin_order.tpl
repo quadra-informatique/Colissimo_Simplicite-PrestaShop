@@ -31,43 +31,42 @@
             {if $is_home}
                 <span>{$delivery_mode[$delivery_infos->delivery_mode]|escape:'html':'UTF-8'}</span><br /><br />
                 <span><b>{l s='Customer' mod='colissimo_simplicite'} : </b>
-                    {$address_delivery->firstname|escape:'html':'UTF-8'} {$address_delivery->lastname|escape:'html':'UTF-8'}</span><br />
-                {if $delivery_infos->cecompanyname}<b>
-                        {l s='Company' mod='colissimo_simplicite'} : </b>{$delivery_infos->cecompanyname|escape:'html':'UTF-8'}<br/>
-
+                {$address_delivery->firstname|escape:'html':'UTF-8'} {$address_delivery->lastname|escape:'html':'UTF-8'}</span><br />
+                {if $delivery_infos->cecompanyname}
+                    <b>{l s='Company' mod='colissimo_simplicite'} : </b>{$delivery_infos->cecompanyname|escape:'html':'UTF-8'}<br/>
                 {/if}
-                {if $delivery_infos->ceemail}<b>
-                        {l s='E-mail address' mod='colissimo_simplicite'} : </b>{$delivery_infos->ceemail|escape:'html':'UTF-8'}<br/>
-                    {/if}
-                    {if $delivery_infos->cephonenumber}<b>
-                        {l s='Phone' mod='colissimo_simplicite'} : </b>{$delivery_infos->cephonenumber|escape:'html':'UTF-8'}<br/><br/>
-                    {/if}
+                {if $delivery_infos->ceemail}
+                    <b>{l s='E-mail address' mod='colissimo_simplicite'} : </b>{$delivery_infos->ceemail|escape:'html':'UTF-8'}<br/>
+                {/if}
+                {if $delivery_infos->cephonenumber}
+                    <b>{l s='Phone' mod='colissimo_simplicite'} : </b>{$delivery_infos->cephonenumber|escape:'html':'UTF-8'}<br/><br/>
+                {/if}
                 <b>{l s='Customer address' mod='colissimo_simplicite'} : </b><br/>
                 {$address_delivery->address1|escape:'html':'UTF-8'}<br />
                 {$address_delivery->address2|escape:'html':'UTF-8'}<br />
                 {$address_delivery->postcode|escape:'html':'UTF-8'}<br />
                 {$address_delivery->city|escape:'html':'UTF-8'}<br />
                 {$address_delivery->country|escape:'html':'UTF-8'}<br />
-                {if $address_delivery->other}<hr><b>
-                        {l s='Other' mod='colissimo_simplicite'} : </b>{$address_delivery->other|escape:'html':'UTF-8'}<br /><br />
-                    {/if}
-                    {if $delivery_infos->cedoorcode1}<b>
-                        {l s='Door code' mod='colissimo_simplicite'} 1 : </b>{$delivery_infos->cedoorcode1|escape:'html':'UTF-8'}<br/>
-                    {/if}
-                    {if $delivery_infos->cedoorcode2}<b>
-                        {l s='Door code' mod='colissimo_simplicite'} 2 : </b>{$delivery_infos->cedoorcode2|escape:'html':'UTF-8'}<br/>
-                    {/if}
-                    {if $delivery_infos->cedeliveryinformation}<b>{l s='Delivery information' mod='colissimo_simplicite'} : </b>
+                {if $address_delivery->other}<hr>
+                    <b>{l s='Other' mod='colissimo_simplicite'} : </b>{$address_delivery->other|escape:'html':'UTF-8'}<br /><br />
+                {/if}
+                {if $delivery_infos->cedoorcode1}
+                    <b>{l s='Door code' mod='colissimo_simplicite'} 1 : </b>{$delivery_infos->cedoorcode1|escape:'html':'UTF-8'}<br/>
+                {/if}
+                {if $delivery_infos->cedoorcode2}
+                    <b>{l s='Door code' mod='colissimo_simplicite'} 2 : </b>{$delivery_infos->cedoorcode2|escape:'html':'UTF-8'}<br/>
+                {/if}
+                {if $delivery_infos->cedeliveryinformation}<b>{l s='Delivery information' mod='colissimo_simplicite'} : </b>
                     {$delivery_infos->cedeliveryinformation|escape:'htmlall':'UTF-8'}<br/><br/>
                 {/if}
             {else}
                 <span>{$delivery_mode[$delivery_infos->delivery_mode]|escape:'html':'UTF-8'}</span><br /><br />
-                {if $delivery_infos->prid}<b>
-                        {l s='Pick up point ID' mod='colissimo_simplicite'} : </b>{$delivery_infos->prid|escape:'html':'UTF-8'}<br/>
-                    {/if}
-                    {if $delivery_infos->prname}<b>
-                        {l s='Pick up point' mod='colissimo_simplicite'} : </b>{$delivery_infos->prname|escape:'html':'UTF-8'}<br/>
-                    {/if}
+                {if $delivery_infos->prid}
+                    <b>{l s='Pick up point ID' mod='colissimo_simplicite'} : </b>{$delivery_infos->prid|escape:'html':'UTF-8'}<br/>
+                {/if}
+                {if $delivery_infos->prname}
+                    <b>{l s='Pick up point' mod='colissimo_simplicite'} : </b>{$delivery_infos->prname|escape:'html':'UTF-8'}<br/>
+                {/if}
                 <b>{l s='Pick up point address' mod='colissimo_simplicite'} : </b><br/>
                 {if $delivery_infos->pradress1}
                     {$delivery_infos->pradress1|escape:'html':'UTF-8'}<br/>
@@ -84,13 +83,12 @@
                 {$delivery_infos->przipcode|escape:'html':'UTF-8'}<br/>
                 {$delivery_infos->prtown|escape:'html':'UTF-8'}<br/>
                 {$name_country|escape:'htmlall':'UTF-8'}<br/>
-                {if $delivery_infos->ceemail}<b>
-                        {l s='Email' mod='colissimo_simplicite'} : </b>{$delivery_infos->ceemail|escape:'html':'UTF-8'}<br/>
-                    {/if}
-                    {if $delivery_infos->cephonenumber}<b>
-                        {l s='Phone' mod='colissimo_simplicite'} : </b>{$delivery_infos->cephonenumber|escape:'html':'UTF-8'}<br/>
-                    {/if}
-
+                {if $delivery_infos->ceemail}
+                    <b>{l s='Email' mod='colissimo_simplicite'} : </b>{$delivery_infos->ceemail|escape:'html':'UTF-8'}<br/>
+                {/if}
+                {if $delivery_infos->cephonenumber}
+                    <b>{l s='Phone' mod='colissimo_simplicite'} : </b>{$delivery_infos->cephonenumber|escape:'html':'UTF-8'}<br/>
+                {/if}
             {/if}
         {else}
             <span>{l s='Pickup delivery' mod='colissimo_simplicite'}</span><br /><br />
@@ -99,9 +97,12 @@
             {*if $address_delivery->company}
                 <b>{l s='Company' mod='colissimo_simplicite'} : </b> {$address_delivery->company|escape:'html':'UTF-8'}<br/>
             {/if*}
-            {if $delivery_infos['identifiant']}<b>
-                    {l s='Identifiant' mod='colissimo_simplicite'} : </b>{$delivery_infos['identifiant']|escape:'html':'UTF-8'}<br/><br/>
-                {/if}
+            {if $delivery_infos['identifiant']}
+                <b>{l s='Identifiant' mod='colissimo_simplicite'} : </b>{$delivery_infos['identifiant']|escape:'html':'UTF-8'}<br/><br/>
+            {/if}
+            {if $delivery_infos['nom']}
+                <b>{l s='Shop' mod='colissimo_simplicite'} : </b>{$delivery_infos['nom']|escape:'html':'UTF-8'}<br/><br/>
+            {/if}
             <b>{l s='Withdrawal point' mod='colissimo_simplicite'} : </b><br/>
             {$address_delivery->address1|escape:'html':'UTF-8'}<br />
             {if $address_delivery->address2}

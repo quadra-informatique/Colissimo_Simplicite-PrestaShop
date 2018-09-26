@@ -182,4 +182,5 @@ $_MODULE['<{colissimo_simplicite}prestashop>admin_order_021944549c2795a6e4db23b9
 $_MODULE['<{colissimo_simplicite}prestashop>admin_order_ce8ae9da5b7cd6c3df2929543a9af92d'] = 'Email';
 $_MODULE['<{colissimo_simplicite}prestashop>admin_order_2b1a3274ecfc11efbc6adbedf2ba009b'] = 'Point de retrait';
 $_MODULE['<{colissimo_simplicite}prestashop>admin_order_c9437f7d5f041bdf9e1361e6966ee00e'] = 'Identifiant du point de retrait';
+$_MODULE['<{colissimo_simplicite}prestashop>admin_order_9f82518d468b9fee614fcc92f76bb163'] = 'Commerce';
 $_MODULE['<{colissimo_simplicite}prestashop>admin_order_08eb31af908e2244867f6e812f82e935'] = 'Adresse du point de retrait';
